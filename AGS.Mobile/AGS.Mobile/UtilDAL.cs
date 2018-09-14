@@ -14,7 +14,7 @@ namespace AGS.Mobile
         {
             var content = string.Empty;
             //var result = await client.GetStringAsync(@"http://10.0.0.2:49805/api/values/5");
-            var response = client.GetAsync(@"http://192.168.1.8:49805/api/values/5").Result;
+            var response = client.GetAsync(@"http://192.168.1.2:49805/api/values/5").Result;
             //var response = client.GetAsync(@"http://192.168.1.9/api/values/5").Result;
             if (response.IsSuccessStatusCode)
             {
