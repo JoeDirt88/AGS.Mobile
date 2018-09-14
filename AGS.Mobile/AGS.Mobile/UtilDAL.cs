@@ -18,6 +18,8 @@ namespace AGS.Mobile
             //var response = client.GetAsync(@"http://192.168.1.9/api/values/5").Result;
             if (response.IsSuccessStatusCode)
             {
+                // This is where i can check if i have an error with connection issues again
+
                 content = response.Content.ReadAsStringAsync().Result;
             }
 
