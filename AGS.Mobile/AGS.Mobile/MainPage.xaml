@@ -6,9 +6,15 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
+        <Label Text="WELCOME TO AG Softworks" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
+        <Button Text= "Vitamin A Deficiency"
+                Clicked="VADButton_Clicked"/>
+        <Button Text= "Bitot's Spots"
+                Clicked="BitButton_Clicked"/>
+        <Button Text= "Metabolic Screening"
+                Clicked="MetButton_Clicked"/>
     </StackLayout>
 
 </ContentPage>

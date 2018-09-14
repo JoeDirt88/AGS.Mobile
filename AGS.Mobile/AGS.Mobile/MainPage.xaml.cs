@@ -13,5 +13,20 @@ namespace AGS.Mobile
         {
             InitializeComponent();
         }
+
+        private async void VADButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new VADefPage());
+        }
+
+        private async void BitButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new VADefPage());
+        }
+
+        private async void MetButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new VADefPage());
+        }
     }
 }
