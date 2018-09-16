@@ -12,16 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace AGS.Mobile
 {
-    public class Symptopm
-    {
-        public string Question { get; set; }
-        public double Significance { get; set; }
-    }
-
-    public class RootObject
-    {
-        public List<Symptopm> Symptopms { get; set; }
-    }
+    
 
     /*
     public class RandomObject
@@ -141,6 +132,17 @@ namespace AGS.Mobile
             }
             */
 
+        }
+
+        public class Symptom
+        {
+            public string Question { get; set; }
+            public double Significance { get; set; }
+        }
+
+        public class RootObject
+        {
+            public List<Symptom> Symptoms { get; set; }
         }
     }
 }
