@@ -36,11 +36,13 @@ namespace AGS.Mobile
                 list.Add(new Symptom(matches.Groups[1].Value));
             }
 
+            if (!list.Any())
+                throw new Exception("API connection issue :/");
+
             StackLayout layout = new StackLayout { Orientation = StackOrientation.Vertical };
 
             foreach (var question in list)
             {
-                layout.Children.Add(new Checkbox());
                 layout.Children.Add(new Label { Text = question.Question });
             }
 
