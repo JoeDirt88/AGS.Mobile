@@ -51,12 +51,55 @@ namespace AGS.Mobile
 
         private async void BitButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new VADefPage());
+            var qSurvey = UtilDAL.GetSurvey("2");
+
+            var list = new List<Symptom>();
+            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
+            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
+            {
+                list.Add(new Symptom(matches.Groups[1].Value));
+            }
+
+            if (!list.Any())
+                throw new Exception("API connection issue :/");
+
+            StackLayout layout = new StackLayout { Orientation = StackOrientation.Vertical };
+
+            foreach (var question in list)
+            {
+                layout.Children.Add(new Label { Text = question.Question });
+            }
+
+            await Navigation.PushModalAsync(new VADefPage { Content = layout });
         }
 
         private async void MetButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new VADefPage());
+            var qSurvey = UtilDAL.GetSurvey("5");
+
+            var list = new List<Symptom>();
+            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
+            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
+            {
+                list.Add(new Symptom(matches.Groups[1].Value));
+            }
+
+            StackLayout layout = new StackLayout { Orientation = StackOrientation.Vertical };
+
+            if (!list.Any())
+            {
+                layout.Children.Add(new Label { Text = "No Results." } );
+                await Navigation.PushModalAsync(new VADefPage { Content = layout });
+            }
+            else
+            {
+                foreach (var question in list)
+                {
+                    layout.Children.Add(new Label { Text = question.Question });
+                }
+
+                await Navigation.PushModalAsync(new VADefPage { Content = layout });
+            }
         }
     }
 }
