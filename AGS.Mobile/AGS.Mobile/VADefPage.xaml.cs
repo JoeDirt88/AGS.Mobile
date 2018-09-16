@@ -12,6 +12,18 @@ using System.Text.RegularExpressions;
 
 namespace AGS.Mobile
 {
+    public class Symptopm
+    {
+        public string Question { get; set; }
+        public double Significance { get; set; }
+    }
+
+    public class RootObject
+    {
+        public List<Symptopm> Symptopms { get; set; }
+    }
+
+    /*
     public class RandomObject
     {
         public Symptoms Symptoms { get; set; }
@@ -91,7 +103,7 @@ namespace AGS.Mobile
     {
         public string Question { get; set; }
         public float Significance { get; set; }
-    }
+    }*/
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class VADefPage : ContentPage
@@ -111,8 +123,10 @@ namespace AGS.Mobile
 
             //var mJson = "\"{\\r\\n    \\\"Symptoms\\\" : " + qSurvey + "\\r\\n }\"";
 
-           // var s = JsonConvert.DeserializeObject<string>(qSurvey);
-           // var d = JsonConvert.DeserializeObject<RandomObject>(s);
+            var s = JsonConvert.DeserializeObject<string>(qSurvey);
+            var d = JsonConvert.DeserializeObject<RootObject>(s);
+
+            /* Regex done by Shaun
 
             char dQ = '"';
 
@@ -125,19 +139,8 @@ namespace AGS.Mobile
             {
                 list.Add(new Symptom(ItemMatch.Groups[0].Value));
             }
-
+            */
 
         }
-    }
-    
-    public class SurveyModel
-    {
-        public List<SurveyQuestion> SurveyQuestions { get; set; }
-    }
-
-    public class SurveyQuestion
-    {
-        public string Question { get; set; }
-        public float Significance { get; set; }
     }
 }
