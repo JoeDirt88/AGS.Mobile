@@ -27,6 +27,7 @@ namespace AGS.Mobile
 
         private async void VADButton_Clicked(object sender, EventArgs e)
         {
+            /*
             var qSurvey = UtilDAL.GetSurvey();
 
             var list = new List<Symptom>();
@@ -39,14 +40,19 @@ namespace AGS.Mobile
             if (!list.Any())
                 throw new Exception("API connection issue :/");
 
-            StackLayout layout = new StackLayout { Orientation = StackOrientation.Vertical };
-
+            var layout = new StackLayout
+            {   Orientation = StackOrientation.Vertical,
+                HorizontalOptions = LayoutOptions.StartAndExpand
+            };
+            
             foreach (var question in list)
             {
                 layout.Children.Add(new Label { Text = question.Question });
+                layout.Children.Add(new Switch { IsToggled = false});
             }
-
-            await Navigation.PushModalAsync(new VADefPage { Content = layout });
+            */
+            
+            await Navigation.PushModalAsync(new ListViewXaml());
         }
 
         private async void BitButton_Clicked(object sender, EventArgs e)
@@ -75,7 +81,7 @@ namespace AGS.Mobile
 
         private async void MetButton_Clicked(object sender, EventArgs e)
         {
-            var qSurvey = UtilDAL.GetSurvey("5");
+            var qSurvey = UtilDAL.GetSurvey("9");
 
             var list = new List<Symptom>();
             Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);

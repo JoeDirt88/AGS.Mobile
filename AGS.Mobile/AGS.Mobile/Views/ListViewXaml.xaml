@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AGS.Mobile.ListViewXaml">
+    <StackLayout>
+        <Label Text="Questionaire:"
+               TextColor="Black"
+               FontSize="Medium"
+               VerticalOptions="Start"
+               HorizontalOptions="Center"/>
+        <ListView x:Name="lstView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!--comment and uncomment lines to see each cell type-->
+                    <!--<TextCell Text="{Binding name}" Detail="{Binding comment}" />-->
+                    <!--<ImageCell Text="{Binding name}" Detail="{Binding comment}" ImageSource="{Binding image}" />-->
+                    <SwitchCell Text="{Binding question}" 
+                                On="{Binding isTrue}" 
+                                StyleId="MainTheme.Base"/>
+                    <!--<EntryCell Label="{Binding name}" Text="{Binding comment}" />-->
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Save Results"
+                Clicked="Button_Clicked_VAD_save"
+                FontSize="Micro"
+                HorizontalOptions="Center"
+                VerticalOptions="End"/>
+    </StackLayout>
+
+</ContentPage>

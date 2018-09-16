@@ -13,7 +13,7 @@ namespace AGS.Mobile
         public static string GetSurvey(string id)
         {
             var content = string.Empty;
-            var response = client.GetAsync($@"http://192.168.7.12:49805/api/values/{id}").Result;
+            var response = client.GetAsync($@"http://192.168.7.4:49805/api/values/{id}").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -27,7 +27,7 @@ namespace AGS.Mobile
         public static string GetSurvey()
         {
             var content = string.Empty;
-            var response = client.GetAsync(@"http://192.168.7.12:49805/api/values").Result;
+            var response = client.GetAsync(@"http://192.168.7.4:49805/api/values").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -37,9 +37,5 @@ namespace AGS.Mobile
             }
             return content;
         }
-
-
     }
-
-
 }

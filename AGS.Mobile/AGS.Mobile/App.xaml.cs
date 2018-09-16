@@ -9,9 +9,10 @@ namespace AGS.Mobile
     {
         public App()
         {
-            InitializeComponent();
+            // Root Page of Application
+            MainPage = new NavigationPage(new MainPage());
 
-            MainPage = new MainPage();
+            //MainPage = new MainPage();
         }
 
         protected override void OnStart()

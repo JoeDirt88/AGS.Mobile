@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AGS.Mobile"
-             x:Class="AGS.Mobile.MainPage">
+             x:Class="AGS.Mobile.MainPage"
+             Title="AG Softworks"
+             Icon="Icon.png"
+             Scale="1">
 
-    <StackLayout>
+    <StackLayout BackgroundColor="DarkGray">
         <!-- Place new controls here -->
-        <Label Text="WELCOME TO AG Softworks" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
         <Button Text= "Vitamin A Deficiency"
                 Clicked="VADButton_Clicked"/>
         <Button Text= "Bitot's Spots"
