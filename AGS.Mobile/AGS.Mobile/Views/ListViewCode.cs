@@ -62,9 +62,6 @@ namespace AGS.Mobile
             {
                 survey.Add(new SurveyModel() { question = que.Question, isTrue = false });
             }
-            
-            //await Navigation.PushModalAsync(new VADefPage { Content = layout });
-
         }
 	}
 }

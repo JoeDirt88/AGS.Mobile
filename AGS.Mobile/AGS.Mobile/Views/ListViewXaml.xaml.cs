@@ -39,13 +39,35 @@ namespace AGS.Mobile
             {
                 survey.Add(new SurveyModel() { question = que.Question, isTrue = false });
             }
-
         }
 
         private void Button_Clicked_VAD_save(object sender, EventArgs e)
         {
             // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
+            string sAnswer = string.Empty;
+            foreach (var ans in survey)
+            {
 
+                sAnswer = sAnswer + Bool2Bin(ans.isTrue);
+                sAnswer = sAnswer + " ";
+            }
+            sAnswer = sAnswer.Substring(0, sAnswer.Length - 1);
+            Console.WriteLine(sAnswer);
+            UtilDAL.PostAnswer(sAnswer);
+            Navigation.PopModalAsync();
+        }
+
+        private string Bool2Bin(Boolean tick)
+        {
+            if (tick == true)
+            {
+                return "1";
+            }
+            else
+            {
+                return "0";
+            }
+            
         }
     }
 }
