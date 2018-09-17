@@ -15,8 +15,8 @@
                     <!--comment and uncomment lines to see each cell type-->
                     <!--<TextCell Text="{Binding name}" Detail="{Binding comment}" />-->
                     <!--<ImageCell Text="{Binding name}" Detail="{Binding comment}" ImageSource="{Binding image}" />-->
-                    <SwitchCell Text="{Binding question}" 
-                                On="{Binding isTrue}" 
+                    <SwitchCell Text="{Binding Mquestion}" 
+                                On="{Binding MisTrue}" 
                                 StyleId="MainTheme.Base"/>
                     <!--<EntryCell Label="{Binding name}" Text="{Binding comment}" />-->
                 </DataTemplate>

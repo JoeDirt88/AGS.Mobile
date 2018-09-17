@@ -11,14 +11,14 @@ using Xamarin.Forms.Xaml;
 
 namespace AGS.Mobile
 {
-    public partial class ListViewXaml : ContentPage
+    public partial class ListViewXamlMet : ContentPage
     {
-        private ObservableCollection<SurveyModel> Example_survey { get; set; }
-        public ListViewXaml()
+        private ObservableCollection<SurveyModel> Met_survey { get; set; }
+        public ListViewXamlMet()
         {
-            Example_survey = new ObservableCollection<SurveyModel>();
+            Met_survey = new ObservableCollection<SurveyModel>();
             InitializeComponent();
-            lstView.ItemsSource = Example_survey;
+            lstViewMet.ItemsSource = Met_survey;
            
             var qSurvey = UtilDAL.GetSurvey();
 
@@ -35,37 +35,24 @@ namespace AGS.Mobile
 
             foreach (var que in list)
             {
-                Example_survey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
+                Met_survey.Add(new SurveyModel() { Mquestion = que.Question, Mdata = string.Empty });
             }
         }
 
-        private void Button_Clicked_VAD_save(object sender, EventArgs e)
+        private void Button_Clicked_MET_save(object sender, EventArgs e)
         {
             // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
             string sAnswer = string.Empty;
-            foreach (var ans in Example_survey)
+            foreach (var ans in Met_survey)
             {
 
-                sAnswer = sAnswer + Bool2Bin(ans.MisTrue);
+                sAnswer = sAnswer + ans.Mdata;
                 sAnswer = sAnswer + " ";
             }
             sAnswer = sAnswer.Substring(0, sAnswer.Length - 1);
             Console.WriteLine(sAnswer);
             UtilDAL.PostAnswer(sAnswer);
             Navigation.PopModalAsync();
-        }
-
-        private string Bool2Bin(Boolean tick)
-        {
-            if (tick == true)
-            {
-                return "1";
-            }
-            else
-            {
-                return "0";
-            }
-            
         }
     }
 }

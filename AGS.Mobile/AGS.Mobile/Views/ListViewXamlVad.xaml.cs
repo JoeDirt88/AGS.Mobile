@@ -11,15 +11,14 @@ using Xamarin.Forms.Xaml;
 
 namespace AGS.Mobile
 {
-    public partial class ListViewXaml : ContentPage
+    public partial class ListViewXamlVad : ContentPage
     {
-        private ObservableCollection<SurveyModel> Example_survey { get; set; }
-        public ListViewXaml()
+        private ObservableCollection<SurveyModel> Vad_survey { get; set; }
+        public ListViewXamlVad()
         {
-            Example_survey = new ObservableCollection<SurveyModel>();
+            Vad_survey = new ObservableCollection<SurveyModel>();
             InitializeComponent();
-            lstView.ItemsSource = Example_survey;
-           
+            lstViewVad.ItemsSource = Vad_survey;
             var qSurvey = UtilDAL.GetSurvey();
 
             var list = new List<Symptom>();
@@ -35,7 +34,7 @@ namespace AGS.Mobile
 
             foreach (var que in list)
             {
-                Example_survey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
+                Vad_survey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
             }
         }
 
@@ -43,7 +42,7 @@ namespace AGS.Mobile
         {
             // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
             string sAnswer = string.Empty;
-            foreach (var ans in Example_survey)
+            foreach (var ans in Vad_survey)
             {
 
                 sAnswer = sAnswer + Bool2Bin(ans.MisTrue);

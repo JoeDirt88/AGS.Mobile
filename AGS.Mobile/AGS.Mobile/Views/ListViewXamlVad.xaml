@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AGS.Mobile.ListViewXamlVad"
+             Title="Vitamin A deficiency"
+             Style="MainTheme">
+    <StackLayout>
+        <ListView x:Name="lstViewVad">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <SwitchCell Text="{Binding Mquestion}"
+                                On="{Binding MisTrue}" 
+                                StyleId="MainTheme.Base"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Save Results"
+                Clicked="Button_Clicked_VAD_save"
+                VerticalOptions="End"/>
+    </StackLayout>
+
+</ContentPage>

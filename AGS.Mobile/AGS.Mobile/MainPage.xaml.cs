@@ -25,87 +25,67 @@ namespace AGS.Mobile
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Description:    This button event takes the user to the Vitamin A deficiency module
+        /// Status:         Implemented
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void VADButton_Clicked(object sender, EventArgs e)
         {
-            /*
-            var qSurvey = UtilDAL.GetSurvey();
-
-            var list = new List<Symptom>();
-            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
-            {
-                list.Add(new Symptom(matches.Groups[1].Value));
-            }
-
-            if (!list.Any())
-                throw new Exception("API connection issue :/");
-
-            var layout = new StackLayout
-            {   Orientation = StackOrientation.Vertical,
-                HorizontalOptions = LayoutOptions.StartAndExpand
-            };
-            
-            foreach (var question in list)
-            {
-                layout.Children.Add(new Label { Text = question.Question });
-                layout.Children.Add(new Switch { IsToggled = false});
-            }
-            */
-            
-            await Navigation.PushModalAsync(new ListViewXaml());
+            await Navigation.PushModalAsync(new ListViewXamlVad());
         }
 
+        /// <summary>
+        /// Description:    This button event takes the user to the Bitot's Spot module
+        /// Status:         Not Implemented
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void BitButton_Clicked(object sender, EventArgs e)
         {
-            var qSurvey = UtilDAL.GetSurvey("2");
-
-            var list = new List<Symptom>();
-            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
-            {
-                list.Add(new Symptom(matches.Groups[1].Value));
-            }
-
-            if (!list.Any())
-                throw new Exception("API connection issue :/");
-
-            StackLayout layout = new StackLayout { Orientation = StackOrientation.Vertical };
-
-            foreach (var question in list)
-            {
-                layout.Children.Add(new Label { Text = question.Question });
-            }
-
-            await Navigation.PushModalAsync(new VADefPage { Content = layout });
+            // does nothing yet
+            await Navigation.PushModalAsync(new MainPage());
         }
 
+        /// <summary>
+        /// Description:    This button event takes the user to the Metabolic Syndrome module
+        /// Status:         Implemented
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void MetButton_Clicked(object sender, EventArgs e)
         {
-            var qSurvey = UtilDAL.GetSurvey("9");
+            await Navigation.PushModalAsync(new ListViewXamlMet());
+        }
 
-            var list = new List<Symptom>();
-            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
+       /* private async void metbutton_clicked(object sender, eventargs e)
+        {
+            var qsurvey = utildal.getsurvey("9");
+
+            var list = new list<symptom>();
+            regex questioncontentregex = new regex(@"question\\\"": \\""(.*?)\\\""", regexoptions.multiline);
+            foreach (match matches in questioncontentregex.matches(qsurvey))
             {
-                list.Add(new Symptom(matches.Groups[1].Value));
+                list.add(new symptom(matches.groups[1].value));
             }
 
-            StackLayout layout = new StackLayout { Orientation = StackOrientation.Vertical };
+            stacklayout layout = new stacklayout { orientation = stackorientation.vertical };
 
-            if (!list.Any())
+            if (!list.any())
             {
-                layout.Children.Add(new Label { Text = "No Results." } );
-                await Navigation.PushModalAsync(new VADefPage { Content = layout });
+                layout.children.add(new label { text = "no results." });
+                await navigation.pushmodalasync(new vadefpage { content = layout });
             }
             else
             {
                 foreach (var question in list)
                 {
-                    layout.Children.Add(new Label { Text = question.Question });
+                    layout.children.add(new label { text = question.question });
                 }
 
-                await Navigation.PushModalAsync(new VADefPage { Content = layout });
+                await navigation.pushmodalasync(new vadefpage { content = layout });
             }
-        }
+        }*/
     }
 }

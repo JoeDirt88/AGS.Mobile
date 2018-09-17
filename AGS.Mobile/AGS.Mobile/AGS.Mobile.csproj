@@ -15,6 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ListViewXamlMet.xaml.cs">
+      <DependentUpon>ListViewXamlMet.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ListViewXamlVad.xaml.cs">
+      <DependentUpon>ListViewXamlVad.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="VADefPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

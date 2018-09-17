@@ -10,13 +10,13 @@ namespace AGS.Mobile
 {
 	public class ListViewCode : ContentPage
 	{
-        private ObservableCollection<SurveyModel> survey { get; set; }
+        private ObservableCollection<SurveyModel> Example_survey { get; set; }
 
         public ListViewCode ()
 		{
-            survey = new ObservableCollection<SurveyModel>();
+            Example_survey = new ObservableCollection<SurveyModel>();
             ListView lstView = new ListView();
-            lstView.ItemsSource = survey;
+            lstView.ItemsSource = Example_survey;
 
             //TODO - uncomment the region for the built-in cell type you'd like to see
             /*#region textCell
@@ -34,8 +34,8 @@ namespace AGS.Mobile
 
             #region switchCell
             lstView.ItemTemplate = new DataTemplate(typeof(SwitchCell));
-            lstView.ItemTemplate.SetBinding(SwitchCell.TextProperty, "question");
-            lstView.ItemTemplate.SetBinding(SwitchCell.OnProperty, "isTrue");
+            lstView.ItemTemplate.SetBinding(SwitchCell.TextProperty, "Mquestion");
+            lstView.ItemTemplate.SetBinding(SwitchCell.OnProperty, "MisTrue");
             #endregion
 
             /*#region entryCell
@@ -60,7 +60,7 @@ namespace AGS.Mobile
             
             foreach (var que in list)
             {
-                survey.Add(new SurveyModel() { question = que.Question, isTrue = false });
+                Example_survey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
             }
         }
 	}

@@ -4,17 +4,16 @@
              xmlns:local="clr-namespace:AGS.Mobile"
              x:Class="AGS.Mobile.MainPage"
              Title="AG Softworks"
-             Icon="Icon.png"
-             Scale="1">
+             Icon="@drawable/icon"
+             Resources="Icon.png">
 
-    <StackLayout BackgroundColor="DarkGray">
+    <StackLayout VerticalOptions="End">
         <!-- Place new controls here -->
         <Button Text= "Vitamin A Deficiency"
-                Clicked="VADButton_Clicked"/>
+            Clicked="VADButton_Clicked"/>
         <Button Text= "Bitot's Spots"
-                Clicked="BitButton_Clicked"/>
+            Clicked="BitButton_Clicked"/>
         <Button Text= "Metabolic Screening"
-                Clicked="MetButton_Clicked"/>
+            Clicked="MetButton_Clicked"/>
     </StackLayout>
-
 </ContentPage>

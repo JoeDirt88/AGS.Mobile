@@ -6,8 +6,9 @@ namespace AGS.Mobile
 {
     class SurveyModel
     {
-        public string question { get; set; }
-        public bool isTrue { get; set; }
+        public string Mquestion { get; set; }
+        public bool MisTrue { get; set; }
+        public string Mdata { get; set; }
 
         public SurveyModel()
         {
