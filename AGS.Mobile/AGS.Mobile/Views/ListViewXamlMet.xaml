@@ -5,13 +5,10 @@
              x:Class="AGS.Mobile.ListViewXamlMet"
              Title="Metabolic Syndrome">
     <StackLayout>
-        <ListView x:Name="lstViewMet"
-                  HorizontalOptions="CenterAndExpand"
-                  Scale="0.8">
+        <ListView x:Name="lstViewMet">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <EntryCell Label="{Binding Mquestion}"
-                               Keyboard="numeric"
                                Text="{Binding Mdata}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -19,8 +16,6 @@
 
         <Button Text="Save Results"
                 Clicked="Button_Clicked_MET_save"
-                FontSize="Micro"
-                HorizontalOptions="Center"
                 VerticalOptions="End"/>
     </StackLayout>
 

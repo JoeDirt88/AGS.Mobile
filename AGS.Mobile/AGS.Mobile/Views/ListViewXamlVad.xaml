@@ -5,12 +5,14 @@
              Title="Vitamin A deficiency"
              Style="MainTheme">
     <StackLayout>
+        <Label Text="Does the patient suffer:"
+               FontSize="Small"
+               VerticalOptions="Start"/>
         <ListView x:Name="lstViewVad">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <SwitchCell Text="{Binding Mquestion}"
-                                On="{Binding MisTrue}" 
-                                StyleId="MainTheme.Base"/>
+                                On="{Binding MisTrue}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

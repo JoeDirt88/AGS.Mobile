@@ -41,19 +41,22 @@ namespace AGS.Mobile
         private void Button_Clicked_VAD_save(object sender, EventArgs e)
         {
             // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
-            string sAnswer = string.Empty;
+            string sAnswer = "[{";
             foreach (var ans in Vad_survey)
             {
-
-                sAnswer = sAnswer + Bool2Bin(ans.MisTrue);
-                sAnswer = sAnswer + " ";
+                sAnswer = sAnswer + Bool2Bin(ans.MisTrue) + ",";
             }
-            sAnswer = sAnswer.Substring(0, sAnswer.Length - 1);
+            sAnswer = sAnswer.Substring(0, sAnswer.Length - 1)+"}]";
             Console.WriteLine(sAnswer);
             UtilDAL.PostAnswer(sAnswer);
             Navigation.PopModalAsync();
         }
 
+        /// <summary>
+        /// Description:    Quick converter to condition data before POST
+        /// </summary>
+        /// <param name="tick">Boolean answer from SwitchCell</param>
+        /// <returns>string(true = "1", false = "0")</returns>
         private string Bool2Bin(Boolean tick)
         {
             if (tick == true)
@@ -64,7 +67,6 @@ namespace AGS.Mobile
             {
                 return "0";
             }
-            
         }
     }
 }

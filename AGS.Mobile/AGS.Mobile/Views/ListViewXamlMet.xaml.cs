@@ -42,14 +42,12 @@ namespace AGS.Mobile
         private void Button_Clicked_MET_save(object sender, EventArgs e)
         {
             // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
-            string sAnswer = string.Empty;
+            string sAnswer = "[{";
             foreach (var ans in Met_survey)
             {
-
-                sAnswer = sAnswer + ans.Mdata;
-                sAnswer = sAnswer + " ";
+                sAnswer = sAnswer + ans.Mdata + ",";
             }
-            sAnswer = sAnswer.Substring(0, sAnswer.Length - 1);
+            sAnswer = sAnswer.Substring(0, sAnswer.Length - 1)+"}]";
             Console.WriteLine(sAnswer);
             UtilDAL.PostAnswer(sAnswer);
             Navigation.PopModalAsync();

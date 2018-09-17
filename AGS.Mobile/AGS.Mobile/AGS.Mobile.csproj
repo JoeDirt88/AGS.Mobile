@@ -24,10 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="VADefPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\ListViewXaml.xaml">
+    <EmbeddedResource Update="TemplateCode\ListViewXaml.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
