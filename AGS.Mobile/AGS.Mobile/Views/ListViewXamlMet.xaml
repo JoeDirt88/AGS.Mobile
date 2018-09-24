@@ -5,6 +5,10 @@
              x:Class="AGS.Mobile.ListViewXamlMet"
              Title="Metabolic Syndrome">
     <StackLayout>
+        <Label Text="Please enter measurement of patient:"
+               FontSize="Small"
+               TextColor="Black"
+               VerticalOptions="Start"/>
         <ListView x:Name="lstViewMet">
             <ListView.ItemTemplate>
                 <DataTemplate>

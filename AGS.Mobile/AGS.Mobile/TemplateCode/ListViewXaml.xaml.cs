@@ -13,19 +13,19 @@ namespace AGS.Mobile
 {
     public partial class ListViewXaml : ContentPage
     {
-        private ObservableCollection<SurveyModel> Example_survey { get; set; }
+        private ObservableCollection<SurveyModel> ExampleSurvey { get; set; }
         public ListViewXaml()
         {
-            Example_survey = new ObservableCollection<SurveyModel>();
+            ExampleSurvey = new ObservableCollection<SurveyModel>();
             InitializeComponent();
-            lstView.ItemsSource = Example_survey;
+            lstView.ItemsSource = ExampleSurvey;
            
-            var qSurvey = UtilDAL.GetSurvey();
+            var qSurvey = UtilDal.GetSurvey();
 
             var list = new List<Symptom>();
 
-            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
+            var questionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
+            foreach (Match matches in questionContentRegex.Matches(qSurvey))
             {
                 list.Add(new Symptom(matches.Groups[1].Value));
             }
@@ -35,15 +35,15 @@ namespace AGS.Mobile
 
             foreach (var que in list)
             {
-                Example_survey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
+                ExampleSurvey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
             }
         }
 
         private void Button_Clicked_VAD_save(object sender, EventArgs e)
         {
             // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
-            string sAnswer = string.Empty;
-            foreach (var ans in Example_survey)
+            var sAnswer = string.Empty;
+            foreach (var ans in ExampleSurvey)
             {
 
                 sAnswer = sAnswer + Bool2Bin(ans.MisTrue);
@@ -51,21 +51,13 @@ namespace AGS.Mobile
             }
             sAnswer = sAnswer.Substring(0, sAnswer.Length - 1);
             Console.WriteLine(sAnswer);
-            UtilDAL.PostAnswer(sAnswer);
+            UtilDal.PostAnswer(sAnswer);
             Navigation.PopModalAsync();
         }
 
-        private string Bool2Bin(Boolean tick)
+        private static string Bool2Bin(bool tick)
         {
-            if (tick == true)
-            {
-                return "1";
-            }
-            else
-            {
-                return "0";
-            }
-            
+            return tick == true ? "1" : "0";
         }
     }
 }

@@ -15,20 +15,21 @@ namespace AGS.Mobile
         public ListViewCodeVad ()
 		{
             Vad_survey = new ObservableCollection<SurveyModel>();
-            ListView lstViewVad = new ListView();
-            lstViewVad.ItemsSource = Vad_survey;
+		    var lstViewVad = new ListView
+		    {
+		        ItemsSource = Vad_survey, ItemTemplate = new DataTemplate(typeof(SwitchCell))
+		    };
 
-            lstViewVad.ItemTemplate = new DataTemplate(typeof(SwitchCell));
-            lstViewVad.ItemTemplate.SetBinding(SwitchCell.TextProperty, "Mquestion");
+		    lstViewVad.ItemTemplate.SetBinding(SwitchCell.TextProperty, "Mquestion");
             lstViewVad.ItemTemplate.SetBinding(SwitchCell.OnProperty, "MisTrue");
             
             Content = lstViewVad;
-            var qSurvey = UtilDAL.GetSurvey();
+            var qSurvey = UtilDal.GetSurvey();
 
             var list = new List<Symptom>();
 
-            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
+            var questionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
+            foreach (Match matches in questionContentRegex.Matches(qSurvey))
             {
                 list.Add(new Symptom(matches.Groups[1].Value));
             }

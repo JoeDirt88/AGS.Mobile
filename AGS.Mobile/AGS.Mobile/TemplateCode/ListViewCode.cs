@@ -10,31 +10,33 @@ namespace AGS.Mobile
 {
 	public class ListViewCode : ContentPage
 	{
-        private ObservableCollection<SurveyModel> Example_survey { get; set; }
+        private ObservableCollection<SurveyModel> ExampleSurvey { get; set; }
 
         public ListViewCode ()
 		{
-            Example_survey = new ObservableCollection<SurveyModel>();
-            ListView lstView = new ListView();
-            lstView.ItemsSource = Example_survey;
+            ExampleSurvey = new ObservableCollection<SurveyModel>();
+		    var lstView = new ListView
+		    {
+		        ItemsSource = ExampleSurvey, ItemTemplate = new DataTemplate(typeof(SwitchCell))
+		    };
 
-            //TODO - uncomment the region for the built-in cell type you'd like to see
-            /*#region textCell
-			lstView.ItemTemplate = new DataTemplate (typeof(TextCell));
-			lstView.ItemTemplate.SetBinding (TextCell.TextProperty, "name");
-			lstView.ItemTemplate.SetBinding (TextCell.DetailProperty, "comment");
-			#endregion*/
+		    //TODO - uncomment the region for the built-in cell type you'd like to see
+		    /*#region textCell
+            lstView.ItemTemplate = new DataTemplate (typeof(TextCell));
+            lstView.ItemTemplate.SetBinding (TextCell.TextProperty, "name");
+            lstView.ItemTemplate.SetBinding (TextCell.DetailProperty, "comment");
+            #endregion*/
 
-            /*#region imageCell
-			lstView.ItemTemplate = new DataTemplate (typeof(ImageCell));
-			lstView.ItemTemplate.SetBinding (ImageCell.TextProperty, "name");
-			lstView.ItemTemplate.SetBinding (ImageCell.DetailProperty, "comment");
-			lstView.ItemTemplate.SetBinding(ImageCell.ImageSourceProperty, "image");
-			#endregion*/
+		    /*#region imageCell
+            lstView.ItemTemplate = new DataTemplate (typeof(ImageCell));
+            lstView.ItemTemplate.SetBinding (ImageCell.TextProperty, "name");
+            lstView.ItemTemplate.SetBinding (ImageCell.DetailProperty, "comment");
+            lstView.ItemTemplate.SetBinding(ImageCell.ImageSourceProperty, "image");
+            #endregion*/
 
-            #region switchCell
-            lstView.ItemTemplate = new DataTemplate(typeof(SwitchCell));
-            lstView.ItemTemplate.SetBinding(SwitchCell.TextProperty, "Mquestion");
+		    #region switchCell
+
+		    lstView.ItemTemplate.SetBinding(SwitchCell.TextProperty, "Mquestion");
             lstView.ItemTemplate.SetBinding(SwitchCell.OnProperty, "MisTrue");
             #endregion
 
@@ -45,12 +47,12 @@ namespace AGS.Mobile
 			#endregion*/
 
             Content = lstView;
-            var qSurvey = UtilDAL.GetSurvey();
+            var qSurvey = UtilDal.GetSurvey();
 
             var list = new List<Symptom>();
 
-            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
+            var questionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
+            foreach (Match matches in questionContentRegex.Matches(qSurvey))
             {
                 list.Add(new Symptom(matches.Groups[1].Value));
             }
@@ -60,7 +62,7 @@ namespace AGS.Mobile
             
             foreach (var que in list)
             {
-                Example_survey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
+                ExampleSurvey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
             }
         }
 	}
