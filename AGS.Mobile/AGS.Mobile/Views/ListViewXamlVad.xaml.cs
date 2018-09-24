@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,36 +19,33 @@ namespace AGS.Mobile
             Vad_survey = new ObservableCollection<SurveyModel>();
             InitializeComponent();
             lstViewVad.ItemsSource = Vad_survey;
-            var qSurvey = UtilDAL.GetSurvey();
-
-            var list = new List<Symptom>();
-
-            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
-            {
-                list.Add(new Symptom(matches.Groups[1].Value));
-            }
+            // This gets the string from the get request (functional)
+            var qSurvey = UtilDal.GetSurvey("Vad");
+            
+            var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
 
             if (!list.Any())
                 throw new Exception("API connection issue :/");
 
+            
             foreach (var que in list)
             {
-                Vad_survey.Add(new SurveyModel() { Mquestion = que.Question, MisTrue = false });
+                Vad_survey.Add(new SurveyModel() { Mquestion = que.question, MisTrue = false });
             }
+            
         }
 
         private void Button_Clicked_VAD_save(object sender, EventArgs e)
         {
             // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
-            string sAnswer = "[{";
+            var sAnswer = "[{";
             foreach (var ans in Vad_survey)
             {
                 sAnswer = sAnswer + Bool2Bin(ans.MisTrue) + ",";
             }
             sAnswer = sAnswer.Substring(0, sAnswer.Length - 1)+"}]";
             Console.WriteLine(sAnswer);
-            UtilDAL.PostAnswer(sAnswer);
+            UtilDal.PostAnswer(sAnswer);
             Navigation.PopModalAsync();
         }
 
@@ -57,16 +54,9 @@ namespace AGS.Mobile
         /// </summary>
         /// <param name="tick">Boolean answer from SwitchCell</param>
         /// <returns>string(true = "1", false = "0")</returns>
-        private string Bool2Bin(Boolean tick)
+        private static string Bool2Bin(bool tick)
         {
-            if (tick == true)
-            {
-                return "1";
-            }
-            else
-            {
-                return "0";
-            }
+            return tick == true ? "1" : "0";
         }
     }
 }

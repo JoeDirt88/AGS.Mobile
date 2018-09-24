@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,37 +19,31 @@ namespace AGS.Mobile
             Met_survey = new ObservableCollection<SurveyModel>();
             InitializeComponent();
             lstViewMet.ItemsSource = Met_survey;
-           
-            var qSurvey = UtilDAL.GetSurvey();
+            // This gets the string from the get request (functional)
+            var qSurvey = UtilDal.GetSurvey("Met");
 
-            var list = new List<Symptom>();
-
-            Regex QuestionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in QuestionContentRegex.Matches(qSurvey))
-            {
-                list.Add(new Symptom(matches.Groups[1].Value));
-            }
-
+            var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
+            
             if (!list.Any())
                 throw new Exception("API connection issue :/");
 
             foreach (var que in list)
             {
-                Met_survey.Add(new SurveyModel() { Mquestion = que.Question, Mdata = string.Empty });
+                Met_survey.Add(new SurveyModel() { Mquestion = que.question, Mdata = string.Empty });
             }
         }
 
         private void Button_Clicked_MET_save(object sender, EventArgs e)
         {
             // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
-            string sAnswer = "[{";
+            var sAnswer = "[{";
             foreach (var ans in Met_survey)
             {
                 sAnswer = sAnswer + ans.Mdata + ",";
             }
             sAnswer = sAnswer.Substring(0, sAnswer.Length - 1)+"}]";
             Console.WriteLine(sAnswer);
-            UtilDAL.PostAnswer(sAnswer);
+            UtilDal.PostAnswer(sAnswer);
             Navigation.PopModalAsync();
         }
     }
