@@ -9,17 +9,18 @@ namespace AGS.Mobile
         public string Mquestion { get; set; }
         public bool MisTrue { get; set; }
         public string Mdata { get; set; }
-        /*
-        public SurveyModel()
-        {
-        }
-        */
-
     }
 
     public class QModel
     {
         public string qID { get; set; }
         public string question { get; set; }
+    }
+
+    public class CModel
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Said { get; set; }
     }
 }
