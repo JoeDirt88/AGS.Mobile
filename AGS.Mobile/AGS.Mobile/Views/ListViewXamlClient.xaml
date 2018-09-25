@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AGS.Mobile.ListViewXamlCnt"
+             Title="Metabolic Syndrome">
+    <StackLayout>
+        <Label Text="Please enter new patient details:"
+               FontSize="Small"
+               TextColor="Black"
+               VerticalOptions="Start"/>
+        <ListView x:Name="lstViewCnt">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <EntryCell Label="{Binding Mquestion}"
+                               Text="{Binding Mdata}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Save Results"
+                Clicked="Button_Clicked_CNT_save"
+                VerticalOptions="End"/>
+    </StackLayout>
+
+</ContentPage>

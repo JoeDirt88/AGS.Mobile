@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AGS.Mobile"
+             x:Class="AGS.Mobile.WelcomePage"
+             Title="AG Softworks"
+             Icon="@drawable/icon"
+             Resources="Icon.png">
+
+    <StackLayout>
+        <!-- Place new Messages here -->
+        <Label Text="Welcome to the AG Softworks medical screening application."
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               FontSize="Medium"
+               TextColor="Black"/>
+        <Label Text="Please select an option below to start:"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               FontSize="Small"
+               TextColor="Accent"/>
+        <!-- Place new controls here -->
+        <Button Text= "Existing Patient"
+                VerticalOptions="End"
+                Clicked="OLDButton_Clicked"/>
+        <Button Text= "New Patient"
+                VerticalOptions="End"
+                Clicked="NEWButton_Clicked"/>
+        <Button Text= "Patient Results"
+                VerticalOptions="End"
+                Clicked="RESButton_Clicked"/>
+    </StackLayout>
+</ContentPage>
