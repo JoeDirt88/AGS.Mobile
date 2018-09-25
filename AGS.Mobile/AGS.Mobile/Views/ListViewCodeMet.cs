@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace AGS.Mobile
@@ -24,22 +25,16 @@ namespace AGS.Mobile
             lstViewMet.ItemTemplate.SetBinding(EntryCell.TextProperty, "Mdata");
 			
             Content = lstViewMet;
-            var qSurvey = UtilDal.GetSurvey();
+		    var qSurvey = UtilDal.GetSurvey("Met");
 
-            var list = new List<Symptom>();
-
-            var questionContentRegex = new Regex(@"Question\\\"": \\""(.*?)\\\""", RegexOptions.Multiline);
-            foreach (Match matches in questionContentRegex.Matches(qSurvey))
-            {
-                list.Add(new Symptom(matches.Groups[1].Value));
-            }
-
+		    var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
+            
             if (!list.Any())
                 throw new Exception("API connection issue :/");
             
             foreach (var que in list)
             {
-                Met_survey.Add(new SurveyModel() { Mquestion = que.Question, Mdata = string.Empty });
+                Met_survey.Add(new SurveyModel() { Mquestion = que.question, Mdata = string.Empty });
             }
         }
 	}
