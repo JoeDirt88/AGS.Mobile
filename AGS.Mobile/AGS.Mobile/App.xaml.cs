@@ -10,7 +10,7 @@ namespace AGS.Mobile
         public App()
         {
             // Root Page of Application
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new WelcomePage());
 
             //MainPage = new MainPage();
         }
