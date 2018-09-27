@@ -1,4 +1,5 @@
 ﻿using System;
+using AGS.Mobile.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
