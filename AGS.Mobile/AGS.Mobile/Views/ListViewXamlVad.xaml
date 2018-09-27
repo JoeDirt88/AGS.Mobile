@@ -1,26 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AGS.Mobile.ListViewXamlVad"
+             x:Class="AGS.Mobile.Views.ListViewXamlVad"
              Title="Vitamin A deficiency"
              Style="MainTheme">
     <StackLayout>
+        <!-- Title info label -->
         <Label Text="Does the patient suffer:"
-               FontSize="Small"
+               FontSize="Medium"
                TextColor="Black"
+               HorizontalOptions="CenterAndExpand"
                VerticalOptions="Start"/>
-        <ListView x:Name="lstViewVad">
+        <!-- Populating list view -->
+        <ListView x:Name="LstViewVad">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <SwitchCell Text="{Binding Mquestion}"
-                                On="{Binding MisTrue}" />
+                    <SwitchCell Text="{Binding SurQuestion}"
+                                On="{Binding IsTrue}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        <!-- Action BTN -->
         <Button Text="Save Results"
                 Clicked="Button_Clicked_VAD_save"
                 VerticalOptions="End"/>
     </StackLayout>
-
 </ContentPage>

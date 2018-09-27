@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AGS.Mobile"
-             x:Class="AGS.Mobile.SelectionPage"
+             x:Class="AGS.Mobile.Pages.SelectionPage"
              Title="AG Softworks"
              Icon="@drawable/icon"
              Resources="Icon.png">

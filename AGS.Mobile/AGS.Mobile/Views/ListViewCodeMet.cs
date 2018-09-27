@@ -1,41 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
 
-namespace AGS.Mobile
+namespace AGS.Mobile.Views
 {
-	public class ListViewCodeMet : ContentPage
+    public class ListViewCodeMet : ContentPage
 	{
-        private ObservableCollection<SurveyModel> Met_survey { get; set; }
+        private ObservableCollection<SurveyModel> MetSurvey { get; set; } = new ObservableCollection<SurveyModel>();
 
-        public ListViewCodeMet ()
+	    public ListViewCodeMet ()
 		{
-            Met_survey = new ObservableCollection<SurveyModel>();
-		    var lstViewMet = new ListView
+            #region ListViewSetup_Met
+            var lstViewMet = new ListView
 		    {
-		        ItemsSource = Met_survey, ItemTemplate = new DataTemplate(typeof(EntryCell))
+		        ItemsSource = MetSurvey,
+		        ItemTemplate = new DataTemplate(typeof(EntryCell))
 		    };
-
-		    lstViewMet.ItemTemplate.SetBinding(EntryCell.LabelProperty, "Mquestion");
-            lstViewMet.ItemTemplate.SetBinding(EntryCell.TextProperty, "Mdata");
-			
+		    // Bind inputs
+            lstViewMet.ItemTemplate.SetBinding(EntryCell.LabelProperty, "SurQuestion");
+            lstViewMet.ItemTemplate.SetBinding(EntryCell.TextProperty, "TextData");
+		    // Set content value
             Content = lstViewMet;
-		    var qSurvey = UtilDal.GetSurvey("Met");
+            #endregion
+            #region PopulateFromqGetSurvey_Met
+            var qSurvey = UtilDal.GetSurvey("Met");
 
-		    var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
-            
-            if (!list.Any())
-                throw new Exception("API connection issue :/");
-            
-            foreach (var que in list)
-            {
-                Met_survey.Add(new SurveyModel() { Mquestion = que.question, Mdata = string.Empty });
-            }
-        }
+		    if (qSurvey.Any())
+		        foreach (var que in qSurvey)
+		        {
+		            MetSurvey.Add(new SurveyModel {SurQuestion = que.Question, TextData = string.Empty});
+		        }
+		    else
+		        throw new Exception("Survey list is empty for Mat");
+            #endregion
+		}
 	}
 }

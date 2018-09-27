@@ -1,50 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace AGS.Mobile
+namespace AGS.Mobile.Views
 {
     public partial class ListViewXamlMet : ContentPage
     {
-        private ObservableCollection<SurveyModel> Met_survey { get; set; }
+        private ObservableCollection<SurveyModel> MetSurvey { get; set; } = new ObservableCollection<SurveyModel>();
+
         public ListViewXamlMet()
         {
-            Met_survey = new ObservableCollection<SurveyModel>();
+            #region ListViewSetup_Met_XAML
             InitializeComponent();
-            lstViewMet.ItemsSource = Met_survey;
-            // This gets the string from the get request (functional)
+            LstViewMet.ItemsSource = MetSurvey;
+            #endregion
+            #region PopulateFromqGetSurvey_Met_XAML
             var qSurvey = UtilDal.GetSurvey("Met");
 
-            var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
-            
-            if (!list.Any())
-                throw new Exception("API connection issue :/");
-
-            foreach (var que in list)
-            {
-                Met_survey.Add(new SurveyModel() { Mquestion = que.question, Mdata = string.Empty });
-            }
+            if (qSurvey.Any())
+                foreach (var que in qSurvey)
+                {
+                    MetSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = string.Empty});
+                }
+            else
+                throw new Exception("Survey list is empty for Met");
+            #endregion
         }
 
+        #region ActionSaveMet
         private void Button_Clicked_MET_save(object sender, EventArgs e)
         {
-            // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
-            var sAnswer = "[{";
-            foreach (var ans in Met_survey)
+            var list = new List<string>();
+            foreach (var ans in MetSurvey)
             {
-                sAnswer = sAnswer + ans.Mdata + ",";
+                list.Add(ans.TextData);
             }
-            sAnswer = sAnswer.Substring(0, sAnswer.Length - 1)+"}]";
-            Console.WriteLine(sAnswer);
-            UtilDal.PostAnswer(sAnswer);
+            // fix this age from datetime.
+            var answerMet = new AnswerModel {Waist = list[0], Systolic = list[1], Age = "2"};
+
+            UtilDal.PostAnswer(answerMet);
             Navigation.PopModalAsync();
         }
+        #endregion
+        
     }
 }

@@ -1,42 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
 
-namespace AGS.Mobile
+namespace AGS.Mobile.Views
 {
-	public class ListViewCodeVad : ContentPage
+    public class ListViewCodeVad : ContentPage
 	{
-        private ObservableCollection<SurveyModel> Vad_survey { get; set; }
+        private ObservableCollection<SurveyModel> VadSurvey { get; set; } = new ObservableCollection<SurveyModel>();
 
-        public ListViewCodeVad ()
+	    public ListViewCodeVad ()
 		{
-            Vad_survey = new ObservableCollection<SurveyModel>();
-		    var lstViewVad = new ListView
+		    #region ListViewSetup_Vad
+            var lstViewVad = new ListView
 		    {
-		        ItemsSource = Vad_survey, ItemTemplate = new DataTemplate(typeof(SwitchCell))
+		        ItemsSource = VadSurvey,
+		        ItemTemplate = new DataTemplate(typeof(SwitchCell))
 		    };
-
-		    lstViewVad.ItemTemplate.SetBinding(SwitchCell.TextProperty, "Mquestion");
-            lstViewVad.ItemTemplate.SetBinding(SwitchCell.OnProperty, "MisTrue");
-
+            // Bind inputs
+		    lstViewVad.ItemTemplate.SetBinding(SwitchCell.TextProperty, "SurQuestion");
+            lstViewVad.ItemTemplate.SetBinding(SwitchCell.OnProperty, "IsTrue");
+            // Set content value
 		    Content = lstViewVad;
+            #endregion
+		    #region PopulateFromqGetSurvey_Vad
+            var qSurvey = UtilDal.GetSurvey("Vad");
 
-		    var qSurvey = UtilDal.GetSurvey("Vad");
-
-		    var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
-
-            if (!list.Any())
-                throw new Exception("API connection issue :/");
-            
-            foreach (var que in list)
-            {
-                Vad_survey.Add(new SurveyModel() { Mquestion = que.question, MisTrue = false });
-            }
-        }
+		    if (qSurvey.Any())
+		        foreach (var que in qSurvey)
+		        {
+		            VadSurvey.Add(new SurveyModel {SurQuestion = que.Question, IsTrue = false});
+		        }
+		    else
+		        throw new Exception("Survey list is empty for Vad");
+		    #endregion
+		}
 	}
 }

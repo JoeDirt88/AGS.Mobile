@@ -1,53 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using AGS.Mobile.Pages;
+using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace AGS.Mobile
+namespace AGS.Mobile.Views
 {
     public partial class ListViewXamlCnt : ContentPage
     {
-        private ObservableCollection<SurveyModel> Cnt_survey { get; set; }
+        private ObservableCollection<SurveyModel> CntSurvey { get; set; } = new ObservableCollection<SurveyModel>();
+
         public ListViewXamlCnt()
         {
-            Cnt_survey = new ObservableCollection<SurveyModel>();
+            #region ListViewSetup_Cnt_XAML
             InitializeComponent();
-            lstViewCnt.ItemsSource = Cnt_survey;
-            // This gets the string from the get request (functional)
+            LstViewCnt.ItemsSource = CntSurvey;
+            #endregion
+            #region PopulateFromqGetSurvey_Cnt_XAML
             var qSurvey = UtilDal.GetSurvey("Cnt");
 
-            var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
-            
-            if (!list.Any())
-                throw new Exception("API connection issue :/");
-
-            foreach (var que in list)
-            {
-                Cnt_survey.Add(new SurveyModel() { Mquestion = que.question, Mdata = string.Empty });
-            }
+            if (qSurvey.Any())
+                foreach (var que in qSurvey)
+                {
+                    CntSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = string.Empty});
+                }
+            else
+                throw new Exception("Survey list is empty for Cnt");
+            #endregion
         }
 
+        #region ActionSaveCnt
         private async void Button_Clicked_CNT_save(object sender, EventArgs e)
         {
+            // Add on-screen values to a lst
             var list = new List<string>();
-            
-            foreach (var ans in Cnt_survey)
+            foreach (var item in CntSurvey)
             {
-                list.Add(ans.Mdata);
+                list.Add(item.TextData);
             }
-
+            // Put list items into model
+            var answerCnt = new PatientInfoModel {Name = list[0], Surname = list[1], Said = list[2]};
             // Send the ID number over to the DAL Utility to check the database
-            if (UtilDal.queryClient(list) == true)
+            if (UtilDal.QueryClient(answerCnt) == true)
             {
                 // This means that the creation was a success
-                await Navigation.PushModalAsync(new SelectionPage());
+                await Navigation.PushModalAsync(new SelectionPage(answerCnt));
                 // success page needs creation
             }
             else
@@ -58,5 +57,7 @@ namespace AGS.Mobile
 
             }
         }
+        #endregion
+        
     }
 }

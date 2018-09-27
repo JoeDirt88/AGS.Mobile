@@ -10,6 +10,8 @@
     <!--We will be using the toolbar so no need to show ActionBar-->
     <item name="windowActionBar">false</item>
     <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette -->
+
+
     <!-- colorPrimary is used for the default action bar background -->
     <item name="colorPrimary">#37177b</item>
     <!-- colorPrimaryDark is used for the status bar -->

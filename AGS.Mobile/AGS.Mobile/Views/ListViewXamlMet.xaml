@@ -2,25 +2,27 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AGS.Mobile.ListViewXamlMet"
-             Title="Metabolic Syndrome">
+             x:Class="AGS.Mobile.Views.ListViewXamlMet"
+             Title="Metabolic Syndrome"
+             Style="MainTheme">
     <StackLayout>
+        <!-- Title info label -->
         <Label Text="Please enter measurement of patient:"
                FontSize="Small"
                TextColor="Black"
+               HorizontalOptions="CenterAndExpand"
                VerticalOptions="Start"/>
-        <ListView x:Name="lstViewMet">
+        <ListView x:Name="LstViewMet">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <EntryCell Label="{Binding Mquestion}"
-                               Text="{Binding Mdata}" />
+                    <EntryCell Label="{Binding SurQuestion}"
+                               Text="{Binding TextData}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        <!-- Action BTN -->
         <Button Text="Save Results"
                 Clicked="Button_Clicked_MET_save"
                 VerticalOptions="End"/>
     </StackLayout>
-
 </ContentPage>

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AGS.Mobile"
-             x:Class="AGS.Mobile.WelcomePage"
+             x:Class="AGS.Mobile.Pages.WelcomePage"
              Title="AG Softworks"
              Icon="@drawable/icon"
              Resources="Icon.png">
@@ -10,7 +10,7 @@
     <StackLayout>
         <!-- Place new Messages here -->
         <Label Text="Welcome to the AG Softworks medical screening application."
-               HorizontalOptions="Center"
+               HorizontalOptions="CenterAndExpand"
                VerticalOptions="Start"
                FontSize="Medium"
                TextColor="Black"/>

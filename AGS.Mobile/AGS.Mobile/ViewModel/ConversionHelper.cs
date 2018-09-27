@@ -15,5 +15,16 @@ namespace AGS.Mobile.ViewModel
         {
             return tick == true ? "1" : "0";
         }
+        
+
+        public static string GetAge(PatientInfoModel patient)
+        {
+            var id = patient.Said;
+            var yyyy = Convert.ToInt16(id.Substring(0, 2)) + 1900;
+            var mm = Convert.ToInt16(id.Substring(2, 2));
+            var dd = Convert.ToInt16(id.Substring(4, 2));
+            var birthday = new DateTime(yyyy, mm, dd);
+            return (DateTime.Now.Year - birthday.Year).ToString();
+        }
     }
 }

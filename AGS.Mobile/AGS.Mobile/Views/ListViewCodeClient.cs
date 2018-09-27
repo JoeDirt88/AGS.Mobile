@@ -1,41 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
 
-namespace AGS.Mobile
+namespace AGS.Mobile.Views
 {
 	public class ListViewCodeCnt : ContentPage
 	{
-        private ObservableCollection<SurveyModel> Cnt_survey { get; set; }
+        private ObservableCollection<SurveyModel> CntSurvey { get; set; } = new ObservableCollection<SurveyModel>();
 
-        public ListViewCodeCnt()
+	    public ListViewCodeCnt()
 		{
-		    Cnt_survey = new ObservableCollection<SurveyModel>();
-		    var lstViewMet = new ListView
+            #region ListViewSetup_Cnt
+            var lstViewMet = new ListView
 		    {
-		        ItemsSource = Cnt_survey, ItemTemplate = new DataTemplate(typeof(EntryCell))
+		        ItemsSource = CntSurvey,
+		        ItemTemplate = new DataTemplate(typeof(EntryCell))
 		    };
-
-		    lstViewMet.ItemTemplate.SetBinding(EntryCell.LabelProperty, "Mquestion");
-            lstViewMet.ItemTemplate.SetBinding(EntryCell.TextProperty, "Mdata");
-			
+		    // Bind inputs
+            lstViewMet.ItemTemplate.SetBinding(EntryCell.LabelProperty, "SurQuestion");
+		    lstViewMet.ItemTemplate.SetBinding(EntryCell.TextProperty, "TextData");
+		    // Set content value
             Content = lstViewMet;
-		    var qSurvey = UtilDal.GetSurvey("Cnt");
-
-		    var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
+            #endregion
+            #region PopulateFromqGetSurvey_Cnt
+            var qSurvey = UtilDal.GetSurvey("Cnt");
             
-            if (!list.Any())
-                throw new Exception("API connection issue :/");
-
-            foreach (var que in list)
-            {
-                Cnt_survey.Add(new SurveyModel() { Mquestion = que.question, Mdata = string.Empty });
-            }
-        }
+		    if (qSurvey.Any())
+		        foreach (var que in qSurvey)
+		        {
+		            CntSurvey.Add(new SurveyModel {SurQuestion = que.Question, TextData = string.Empty});
+		        }
+		    else
+		        throw new Exception("Survey list is empty for Cnt");
+            #endregion
+		}
 	}
 }

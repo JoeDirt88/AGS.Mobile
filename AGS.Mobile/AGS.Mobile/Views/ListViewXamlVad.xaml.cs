@@ -1,62 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace AGS.Mobile
+namespace AGS.Mobile.Views
 {
     public partial class ListViewXamlVad : ContentPage
     {
-        private ObservableCollection<SurveyModel> Vad_survey { get; set; }
-        public ListViewXamlVad()
+        private ObservableCollection<SurveyModel> VadSurvey { get; set; } = new ObservableCollection<SurveyModel>();
+        private PatientInfoModel curPatient;
+
+        public ListViewXamlVad(PatientInfoModel patient)
         {
-            Vad_survey = new ObservableCollection<SurveyModel>();
+            curPatient = patient;
+            #region ListViewSetup_Vad_XAML
             InitializeComponent();
-            lstViewVad.ItemsSource = Vad_survey;
-            // This gets the string from the get request (functional)
+            LstViewVad.ItemsSource = VadSurvey;
+            #endregion
+            #region PopulateFromqGetSurvey_Vad_XAML
             var qSurvey = UtilDal.GetSurvey("Vad");
-            
-            var list = JsonConvert.DeserializeObject<List<QModel>>(qSurvey);
 
-            if (!list.Any())
-                throw new Exception("API connection issue :/");
-
-            
-            foreach (var que in list)
-            {
-                Vad_survey.Add(new SurveyModel() { Mquestion = que.question, MisTrue = false });
-            }
-            
+            if (qSurvey.Any())
+                foreach (var que in qSurvey)
+                {
+                    VadSurvey.Add(new SurveyModel() {SurQuestion = que.Question, IsTrue = false});
+                }
+            else
+                throw new Exception("Survey list is empty for Vad");
+            #endregion
         }
 
+        #region ActionSaveVad
         private void Button_Clicked_VAD_save(object sender, EventArgs e)
         {
-            // THIS IS WHERE THE STATE WILL BE SAVED AND THE ANSWER BE SENT BACK TO THE WEBAPI
-            var sAnswer = "[{";
-            foreach (var ans in Vad_survey)
+            var list = new List<string>();
+            foreach (var ans in VadSurvey)
             {
-                sAnswer = sAnswer + Bool2Bin(ans.MisTrue) + ",";
+                list.Add(ConversionHelper.Bool2Bin(ans.IsTrue));
             }
-            sAnswer = sAnswer.Substring(0, sAnswer.Length - 1)+"}]";
-            Console.WriteLine(sAnswer);
-            UtilDal.PostAnswer(sAnswer);
+
+            var answerVad = new AnswerModel
+            {
+                ParametersVad = list,
+                CurDateTime = DateTime.Today,
+                Said = curPatient.Said,
+                Age = ConversionHelper.GetAge(curPatient)
+        };
+            UtilDal.PostAnswer(answerVad);
             Navigation.PopModalAsync();
         }
-
-        /// <summary>
-        /// Description:    Quick converter to condition data before POST
-        /// </summary>
-        /// <param name="tick">Boolean answer from SwitchCell</param>
-        /// <returns>string(true = "1", false = "0")</returns>
-        private static string Bool2Bin(bool tick)
-        {
-            return tick == true ? "1" : "0";
-        }
+        #endregion
     }
 }

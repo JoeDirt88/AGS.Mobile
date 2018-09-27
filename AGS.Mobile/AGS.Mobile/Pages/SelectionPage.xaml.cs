@@ -1,28 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using AGS.Mobile.ViewModel;
+using AGS.Mobile.Views;
 using Xamarin.Forms;
 
-namespace AGS.Mobile
+namespace AGS.Mobile.Pages
 {
-    public class Symptom
-    {
-        public string Question { get; set; }
-
-        public Symptom(string question)
-        {
-            Question = question;
-        }
-    }
+    
 
     public partial class SelectionPage : ContentPage
     {
-        public SelectionPage()
+        private PatientInfoModel curPatient;
+
+        public SelectionPage(PatientInfoModel patient)
         {
             InitializeComponent();
+            curPatient = patient;
+
         }
 
         /// <summary>
@@ -33,7 +26,7 @@ namespace AGS.Mobile
         /// <param name="e"></param>
         private async void VADButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new ListViewXamlVad());
+            await Navigation.PushModalAsync(new ListViewXamlVad(curPatient));
         }
 
         /// <summary>
@@ -45,7 +38,7 @@ namespace AGS.Mobile
         private async void BitButton_Clicked(object sender, EventArgs e)
         {
             // does nothing yet
-            await Navigation.PushModalAsync(new SelectionPage());
+            await Navigation.PushModalAsync(new SelectionPage(curPatient));
         }
 
         /// <summary>
