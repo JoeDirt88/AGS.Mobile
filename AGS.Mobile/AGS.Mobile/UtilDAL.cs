@@ -95,7 +95,7 @@ namespace AGS.Mobile
         /// </summary>
         /// <param name="patient">Patient South African ID number</param>
         /// <returns>bool "true" for new patient created, or "false" if patient already exists</returns>
-        public static bool QueryClient(PatientInfoModel patient)
+        public static bool QueryNewClient(PatientInfoModel patient)
         {
             var responseGet = client.GetAsync(Route("Patient") + $"{patient.Said}").Result;
             var content = responseGet.IsSuccessStatusCode
@@ -114,6 +114,34 @@ namespace AGS.Mobile
                     $"Response from server API Failed for POST {Route("Patient")} {patient.Said}, check IP config")
                 : true;
 
+        }
+        #endregion
+        #region QueryClient_GET_Patient_id
+
+        /// <summary>
+        /// Description:    Compact GET, and POST method to query the existence of an ID number
+        ///                 in the client db, and add the entry if it doesn't exist.
+        /// Status:         Implemented
+        /// </summary>
+        /// <param name="patient">Patient South African ID number</param>
+        /// <returns>bool "true" for new patient created, or "false" if patient already exists</returns>
+        public static PatientInfoModel QueryClient(PatientInfoModel patient)
+        {
+            var responseGet = client.GetAsync(Route("Patient") + $"{patient.Said}").Result;
+            var content = responseGet.IsSuccessStatusCode
+                ? JsonConvert.DeserializeObject<string>(responseGet.Content.ReadAsStringAsync().Result)
+                : throw new Exception($"Response from server API Failed for GET {Route("Patient")} {patient.Said}, check IP config");
+
+            if (content != "New")
+            {
+                //get proper patient data from API to ensure no garbage
+                var ApiClientData = new PatientInfoModel(); //implement this
+                return patient;
+            }
+            else
+            {
+                return null;
+            }
         }
         #endregion
     }
