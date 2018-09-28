@@ -16,11 +16,11 @@ namespace AGS.Mobile.Pages
         #region ExistingPatientBTN
         /// <summary>
         /// Description:    Takes the user to existing patient page
-        /// Status:         Creating
+        /// Status:         Implemented
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void OLDButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new WelcomePage());
+        private async void OLDButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewXamlPnt());
         #endregion
         #region NewPatientBTN
         /// <summary>

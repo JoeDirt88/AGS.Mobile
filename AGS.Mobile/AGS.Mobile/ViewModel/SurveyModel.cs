@@ -26,11 +26,15 @@ namespace AGS.Mobile.ViewModel
 
     public class AnswerModel
     {
-        public string Said { get; set; }
-        public DateTime CurDateTime { get; set; }
+        // TestData
         public List<string> ParametersVad { get; set; }
         public string Age { get; set; }
         public string Waist { get; set; }
         public string Systolic { get; set; }
+        public string ModuleId { get; set; }
+        // ClientData
+        public string Said { get; set; }
+        // EnvironmentData
+        public DateTime CurDateTime { get; set; }
     }
 }

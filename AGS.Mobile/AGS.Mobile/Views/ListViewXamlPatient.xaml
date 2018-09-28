@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AGS.Mobile.Views.ListViewXamlCnt"
-             Title="Client Data"
+             x:Class="AGS.Mobile.Views.ListViewXamlPnt"
+             Title="Patient Data"
              Style="MainTheme">
     <StackLayout>
         <!-- Title info label -->
-        <Label Text="Please enter new patient details:"
+        <Label Text="Please enter patient details:"
                FontSize="Medium"
                TextColor="Black"
                HorizontalOptions="CenterAndExpand"
                VerticalOptions="Start"/>
         <!-- Populating list view -->
-        <ListView x:Name="LstViewCnt">
+        <ListView x:Name="LstViewPnt">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <EntryCell Label="{Binding SurQuestion}"
@@ -22,7 +22,7 @@
         </ListView>
         <!-- Action BTN -->
         <Button Text="Save Results"
-                Clicked="Button_Clicked_CNT_save"
+                Clicked="Button_Clicked_PNT_save"
                 VerticalOptions="End"/>
     </StackLayout>
 </ContentPage>

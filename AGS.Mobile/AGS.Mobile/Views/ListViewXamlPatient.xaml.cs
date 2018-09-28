@@ -8,23 +8,23 @@ using Xamarin.Forms;
 
 namespace AGS.Mobile.Views
 {
-    public partial class ListViewXamlCnt : ContentPage
+    public partial class ListViewXamlPnt : ContentPage
     {
-        private ObservableCollection<SurveyModel> CntSurvey { get; set; } = new ObservableCollection<SurveyModel>();
+        private ObservableCollection<SurveyModel> PntSurvey { get; set; } = new ObservableCollection<SurveyModel>();
 
-        public ListViewXamlCnt()
+        public ListViewXamlPnt()
         {
-            #region ListViewSetup_Cnt_XAML
+            #region ListViewSetup_Pnt_XAML
             InitializeComponent();
-            LstViewCnt.ItemsSource = CntSurvey;
+            LstViewPnt.ItemsSource = PntSurvey;
             #endregion
-            #region PopulateFromqGetSurvey_Cnt_XAML
+            #region PopulateFromqGetSurvey_Pnt_XAML
             var qSurvey = UtilDal.GetSurvey("Cnt");
 
             if (qSurvey.Any())
                 foreach (var que in qSurvey)
                 {
-                    CntSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = string.Empty});
+                    PntSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = string.Empty});
                 }
             else
                 throw new Exception("Survey list is empty for Cnt");
@@ -32,29 +32,30 @@ namespace AGS.Mobile.Views
         }
 
         #region ActionSaveCnt
-        private async void Button_Clicked_CNT_save(object sender, EventArgs e)
+        private async void Button_Clicked_PNT_save(object sender, EventArgs e)
         {
             // Add on-screen values to a lst
             var list = new List<string>();
-            foreach (var item in CntSurvey)
+            foreach (var item in PntSurvey)
             {
                 list.Add(item.TextData);
             }
             // Put list items into model
             var answerCnt = new PatientInfoModel {Name = list[0], Surname = list[1], Said = list[2]};
             // Send the ID number over to the DAL Utility to check the database
-            if (UtilDal.QueryNewClient(answerCnt) == true)
+
+            if (UtilDal.QueryClient(answerCnt) != null)
             {
-                // This means that the creation was a success
-                await Navigation.PushModalAsync(new SelectionPage(answerCnt));
+                // Call PatientInfoGet
+                var patient = UtilDal.QueryClient(answerCnt);
+                await Navigation.PushModalAsync(new SelectionPage(patient));
                 // success page needs creation
             }
             else
             {
                 // This means a patient with that ID already exists
-                throw new Exception(@"This patient already exists");
+                throw new Exception(@"This patient doesn't exists");
                 // Error page needs creation
-
             }
         }
         #endregion

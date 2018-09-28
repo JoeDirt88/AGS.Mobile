@@ -49,7 +49,7 @@ namespace AGS.Mobile.Pages
         /// <param name="e"></param>
         private async void MetButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new ListViewXamlMet());
+            await Navigation.PushModalAsync(new ListViewXamlMet(curPatient));
         }
     }
 }

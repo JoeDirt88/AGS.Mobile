@@ -10,9 +10,11 @@ namespace AGS.Mobile.Views
     public partial class ListViewXamlMet : ContentPage
     {
         private ObservableCollection<SurveyModel> MetSurvey { get; set; } = new ObservableCollection<SurveyModel>();
+        private PatientInfoModel curPatient;
 
-        public ListViewXamlMet()
+        public ListViewXamlMet(PatientInfoModel patient)
         {
+            curPatient = patient;
             #region ListViewSetup_Met_XAML
             InitializeComponent();
             LstViewMet.ItemsSource = MetSurvey;
@@ -39,7 +41,18 @@ namespace AGS.Mobile.Views
                 list.Add(ans.TextData);
             }
             // fix this age from datetime.
-            var answerMet = new AnswerModel {Waist = list[0], Systolic = list[1], Age = "2"};
+            var answerMet = new AnswerModel
+            {
+                // TestData
+                Waist = list[0],
+                Systolic = list[1],
+                Age = ConversionHelper.GetAge(curPatient),
+                ModuleId = "Met",
+                // ClientData
+                Said = curPatient.Said,
+                // EnvironmentData
+                CurDateTime = DateTime.Today,
+            };
 
             UtilDal.PostAnswer(answerMet);
             Navigation.PopModalAsync();

@@ -43,10 +43,13 @@ namespace AGS.Mobile.Views
 
             var answerVad = new AnswerModel
             {
+                // TestData
                 ParametersVad = list,
-                CurDateTime = DateTime.Today,
+                ModuleId = "Vad",
+                // ClientData
                 Said = curPatient.Said,
-                Age = ConversionHelper.GetAge(curPatient)
+                // EnvironmentData
+                CurDateTime = DateTime.Today
         };
             UtilDal.PostAnswer(answerVad);
             Navigation.PopModalAsync();
