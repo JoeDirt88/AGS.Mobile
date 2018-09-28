@@ -21,6 +21,9 @@
     <Compile Update="Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ListViewXamlPatient.xaml.cs">
+      <DependentUpon>ListViewXamlPatient.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ListViewXamlClient.xaml.cs">
       <DependentUpon>ListViewXamlClient.xaml</DependentUpon>
     </Compile>
