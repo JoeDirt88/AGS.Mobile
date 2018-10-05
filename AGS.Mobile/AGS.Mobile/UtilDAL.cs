@@ -25,10 +25,33 @@ namespace AGS.Mobile
         /// <returns>Full string of requestUri</returns>
         public static string Route(string controller)
         {
-            const string ip = @"196.252.75.110";
+            const string ip = @"192.168.0.11";
             const string port = "49805";
             var route = $@"/AGSoft/{controller}/";
             return @"http://" + ip + ":" + port + route;
+        }
+        #endregion
+        #region GetResultList GET: AGSoft/Values/{id}
+        /// <summary>
+        /// Description:    Request Python module specific question lists for display
+        /// Status:         Implemented
+        /// </summary>
+        /// <param name="id">Python module ID
+        /// Current list of Module ID's:
+        ///     "Vad" = Vitamin A Deficiency questionnaire
+        ///     "Met" = Metabolic Syndrome questionnaire
+        ///     "Bit" = Bitot's Spots questionnaire
+        ///     "Cnt" = Client Information questionnaire
+        /// </param>
+        /// <returns>List of questions as Json from db containing updated questions</returns>
+        public static List<ResultModel> GetResultList(string id)
+        {
+            var response = client.GetAsync(Route("Values") + $"{id}").Result;
+            var content = response.IsSuccessStatusCode
+                ? response.Content.ReadAsStringAsync().Result
+                : throw new Exception($"Response from server API Failed for GET {Route("Values")}{id}, check IP config");
+
+            return JsonConvert.DeserializeObject<List<ResultModel>>(content);
         }
         #endregion
         #region SurveyListBuilder_GET_Module_id
@@ -49,7 +72,7 @@ namespace AGS.Mobile
             var response = client.GetAsync(Route("Module") + $"{id}").Result;
             var content = response.IsSuccessStatusCode
                 ? response.Content.ReadAsStringAsync().Result
-                : throw new Exception($"Response from server API Failed for GET {Route("Module")} {id}, check IP config");
+                : throw new Exception($"Response from server API Failed for GET {Route("Module")}{id}, check IP config");
 
             return JsonConvert.DeserializeObject<List<QuestionInfoModel>>(content);
         }
@@ -87,7 +110,6 @@ namespace AGS.Mobile
         }
         #endregion
         #region CreateNewClient_GET_Patient_id_POST_Patient
-
         /// <summary>
         /// Description:    Compact GET, and POST method to query the existence of an ID number
         ///                 in the client db, and add the entry if it doesn't exist.
@@ -97,15 +119,15 @@ namespace AGS.Mobile
         /// <returns>bool "true" for new patient created, or "false" if patient already exists</returns>
         public static bool QueryNewClient(PatientInfoModel patient)
         {
-            var responseGet = client.GetAsync(Route("Patient") + $"{patient.Said}").Result;
+            var responseGet = client.GetAsync(Route("Patient") + $"{patient}").Result;
             var content = responseGet.IsSuccessStatusCode
-                ? JsonConvert.DeserializeObject<string>(responseGet.Content.ReadAsStringAsync().Result)
+                ? JsonConvert.DeserializeObject<PatientInfoModel>(responseGet.Content.ReadAsStringAsync().Result)
                 : throw new Exception($"Response from server API Failed for GET {Route("Patient")} {patient.Said}, check IP config");
-
-            if (content != "New") return false;
-            
+            // If an ID is found on the db it will return "false"
+            if (content.Said != "0") return false;
+            // Serialize PatientInfo model for POST
             var jsonOb = JsonConvert.SerializeObject(patient, Formatting.Indented);
-
+            // Create connection and send patient info
             const string medType = "application/json";
             var postData = new StringContent(jsonOb, Encoding.UTF8, medType);
             var response = client.PostAsync(Route("Patient"), postData).Result;
@@ -113,14 +135,11 @@ namespace AGS.Mobile
                 ? throw new Exception(
                     $"Response from server API Failed for POST {Route("Patient")} {patient.Said}, check IP config")
                 : true;
-
         }
         #endregion
         #region QueryClient_GET_Patient_id
-
         /// <summary>
-        /// Description:    Compact GET, and POST method to query the existence of an ID number
-        ///                 in the client db, and add the entry if it doesn't exist.
+        /// Description:    GET method to query the existence of an ID number in the client db.
         /// Status:         Implemented
         /// </summary>
         /// <param name="patient">Patient South African ID number</param>
@@ -129,19 +148,10 @@ namespace AGS.Mobile
         {
             var responseGet = client.GetAsync(Route("Patient") + $"{patient.Said}").Result;
             var content = responseGet.IsSuccessStatusCode
-                ? JsonConvert.DeserializeObject<string>(responseGet.Content.ReadAsStringAsync().Result)
-                : throw new Exception($"Response from server API Failed for GET {Route("Patient")} {patient.Said}, check IP config");
+                ? JsonConvert.DeserializeObject<PatientInfoModel>(responseGet.Content.ReadAsStringAsync().Result)
+                : throw new Exception($"Response from server API Failed for GET {Route("Patient")}{patient.Said}, check IP config");
 
-            if (content != "New")
-            {
-                //get proper patient data from API to ensure no garbage
-                var ApiClientData = new PatientInfoModel(); //implement this
-                return patient;
-            }
-            else
-            {
-                return null;
-            }
+            return content;
         }
         #endregion
     }
