@@ -10,8 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LiveXAML" Version="2.1.41" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\..\..\..\.nuget\packages\xamarin.forms\3.1.0.697729\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +27,12 @@
     </Compile>
     <Compile Update="Pages\WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ListViewResults.xaml.cs">
+      <DependentUpon>ListViewResults.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ListViewSuccess.xaml.cs">
+      <DependentUpon>ListViewSuccess.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\ListViewXamlPatient.xaml.cs">
       <DependentUpon>ListViewXamlPatient.xaml</DependentUpon>
@@ -33,5 +46,11 @@
     <Compile Update="Views\ListViewXamlVad.xaml.cs">
       <DependentUpon>ListViewXamlVad.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ViewModel\CardViewTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
