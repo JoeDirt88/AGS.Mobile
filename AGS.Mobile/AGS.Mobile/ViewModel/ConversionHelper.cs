@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AGS.Mobile.ViewModel
 {
@@ -15,8 +13,12 @@ namespace AGS.Mobile.ViewModel
         {
             return tick == true ? "1" : "0";
         }
-        
 
+        /// <summary>
+        /// Description:    Covert PatientInfoModel Said into an age
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns>Patient age this year</returns>
         public static string GetAge(PatientInfoModel patient)
         {
             var id = patient.Said;

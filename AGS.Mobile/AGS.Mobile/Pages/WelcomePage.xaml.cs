@@ -20,7 +20,7 @@ namespace AGS.Mobile.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void OLDButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewXamlPnt());
+        private async void OLDButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewXamlPnt(0));
         #endregion
         #region NewPatientBTN
         /// <summary>
@@ -38,7 +38,7 @@ namespace AGS.Mobile.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void RESButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new WelcomePage());
+        private async void RESButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewXamlPnt(1));
         #endregion
     }
 }

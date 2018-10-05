@@ -51,7 +51,7 @@ namespace AGS.Mobile.Views
                 // ClientData
                 Said = curPatient.Said,
                 // EnvironmentData
-                CurDateTime = DateTime.Today,
+                CurDateTime = DateTime.Now,
             };
 
             UtilDal.PostAnswer(answerMet);
