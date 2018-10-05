@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
+using Xamarin.Forms;
 
 namespace AGS.Mobile.ViewModel
 {
@@ -9,6 +9,17 @@ namespace AGS.Mobile.ViewModel
         public string SurQuestion { get; set; }
         public bool IsTrue { get; set; }
         public string TextData { get; set; }
+    }
+
+    public class ResultModel
+    {
+        // TestData
+        public string ModuleId { get; set; }
+        // TestData
+        public string Screened { get; set; }
+        public string Result { get; set; }
+        // EnvironmentData
+        public DateTime CurDateTime { get; set; }
     }
 
     public class QuestionInfoModel
