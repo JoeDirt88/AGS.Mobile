@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AGS.Mobile.Views.ListViewSuccess"
+             Title="Client Data"
+             Style="MainTheme">
+    <StackLayout>
+        <!-- Title info label -->
+        <Label Text="Patient with the following information found:"
+               FontSize="Medium"
+               TextColor="Black"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Start"/>
+        <!-- Populating list view -->
+        <ListView x:Name="LstViewScs">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <EntryCell Label="{Binding SurQuestion}"
+                               Text="{Binding TextData}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!-- Action BTN -->
+        <Button Text="Continue?"
+                Clicked="Button_Clicked_Y"
+                VerticalOptions="End"/>
+        <Button Text="Correction"
+                Clicked="Button_Clicked_N"
+                VerticalOptions="End"/>
+    </StackLayout>
+</ContentPage>
