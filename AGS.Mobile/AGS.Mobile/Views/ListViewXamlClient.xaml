@@ -21,8 +21,11 @@
             </ListView.ItemTemplate>
         </ListView>
         <!-- Action BTN -->
-        <Button Text="Save Results"
+        <Button Text="Verify details"
                 Clicked="Button_Clicked_CNT_save"
+                VerticalOptions="End"/>
+        <Button Text="Cancel"
+                Clicked="Button_Clicked_RET"
                 VerticalOptions="End"/>
     </StackLayout>
 </ContentPage>

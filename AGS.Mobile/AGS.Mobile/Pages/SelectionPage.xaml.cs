@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using AGS.Mobile.ViewModel;
 using AGS.Mobile.Views;
 using Xamarin.Forms;
@@ -15,7 +16,6 @@ namespace AGS.Mobile.Pages
         {
             InitializeComponent();
             curPatient = patient;
-
         }
 
         /// <summary>
@@ -50,6 +50,15 @@ namespace AGS.Mobile.Pages
         private async void MetButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new ListViewXamlMet(curPatient));
+        }
+
+        private async void Button_Clicked_RET(object sender, EventArgs e)
+        {
+            for (var i = 0; i < (Navigation.ModalStack.Count + 1); i++)
+            {
+                Navigation.PopModalAsync();
+            }
+            await Navigation.PopModalAsync();
         }
     }
 }

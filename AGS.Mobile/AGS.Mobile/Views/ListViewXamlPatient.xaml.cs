@@ -11,21 +11,28 @@ namespace AGS.Mobile.Views
     public partial class ListViewXamlPnt : ContentPage
     {
         private ObservableCollection<SurveyModel> PntSurvey { get; set; } = new ObservableCollection<SurveyModel>();
+        // This determines the case outcome for why the patient search is being done
+        private int selection;
 
-        public ListViewXamlPnt()
+        public ListViewXamlPnt(int i)
         {
             #region ListViewSetup_Pnt_XAML
             InitializeComponent();
             LstViewPnt.ItemsSource = PntSurvey;
+            selection = i;
             #endregion
             #region PopulateFromqGetSurvey_Pnt_XAML
             var qSurvey = UtilDal.GetSurvey("Cnt");
 
             if (qSurvey.Any())
+            {
                 foreach (var que in qSurvey)
                 {
-                    PntSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = string.Empty});
+                    PntSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = string.Empty });
                 }
+                PntSurvey.RemoveAt(0);
+                PntSurvey.RemoveAt(0);
+            }
             else
                 throw new Exception("Survey list is empty for Cnt");
             #endregion
@@ -35,21 +42,18 @@ namespace AGS.Mobile.Views
         private async void Button_Clicked_PNT_save(object sender, EventArgs e)
         {
             // Add on-screen values to a lst
-            var list = new List<string>();
+            var list = string.Empty;
             foreach (var item in PntSurvey)
             {
-                list.Add(item.TextData);
+                list = item.TextData;
             }
             // Put list items into model
-            var answerCnt = new PatientInfoModel {Name = list[0], Surname = list[1], Said = list[2]};
+            var answerCnt = new PatientInfoModel {Name = string.Empty, Surname = string.Empty, Said = list};
             // Send the ID number over to the DAL Utility to check the database
-
-            if (UtilDal.QueryClient(answerCnt) != null)
+            var patient = UtilDal.QueryClient(answerCnt);
+            if (patient.Said!="0")
             {
-                // Call PatientInfoGet
-                var patient = UtilDal.QueryClient(answerCnt);
-                await Navigation.PushModalAsync(new SelectionPage(patient));
-                // success page needs creation
+                await Navigation.PushModalAsync(new ListViewSuccess(patient, selection));
             }
             else
             {
@@ -59,6 +63,10 @@ namespace AGS.Mobile.Views
             }
         }
         #endregion
-        
+
+        private async void Button_Clicked_RET(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }

@@ -24,5 +24,8 @@
         <Button Text="Save Results"
                 Clicked="Button_Clicked_PNT_save"
                 VerticalOptions="End"/>
+        <Button Text="Cancel"
+                Clicked="Button_Clicked_RET"
+                VerticalOptions="End"/>
     </StackLayout>
 </ContentPage>

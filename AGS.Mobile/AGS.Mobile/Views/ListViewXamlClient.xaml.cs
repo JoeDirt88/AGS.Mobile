@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using AGS.Mobile.Pages;
 using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
 
@@ -46,7 +45,8 @@ namespace AGS.Mobile.Views
             if (UtilDal.QueryNewClient(answerCnt) == true)
             {
                 // This means that the creation was a success
-                await Navigation.PushModalAsync(new SelectionPage(answerCnt));
+
+                await Navigation.PushModalAsync(new ListViewSuccess(answerCnt, 0));
                 // success page needs creation
             }
             else
@@ -58,6 +58,10 @@ namespace AGS.Mobile.Views
             }
         }
         #endregion
-        
+
+        private async void Button_Clicked_RET(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }

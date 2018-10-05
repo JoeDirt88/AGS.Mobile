@@ -15,5 +15,7 @@
             Clicked="BitButton_Clicked"/> -->
         <Button Text= "Metabolic Screening"
             Clicked="MetButton_Clicked"/>
+        <Button Text="Return Home"
+                Clicked="Button_Clicked_RET"/>
     </StackLayout>
 </ContentPage>
