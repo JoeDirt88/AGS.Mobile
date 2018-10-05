@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AGS.Mobile.ViewModel.CardViewTemplate">
+
+    <ContentView.Content>
+        <!-- Creates card -->
+        <!-- Should look like
+        
+        |C|=================================|
+        |O|[ModuleId]                       |
+        |L|=================================|
+        |O| Screening date    [CurDateTime] |
+        |U| Screening result       [Result] |
+        |R|=================================|
+        
+        -->
+        <StackLayout>
+            <!-- Sets up the card frame -->
+            <Frame IsClippedToBounds="True"
+                   HasShadow="True"
+                   Padding="0"  
+                   BackgroundColor="White" >
+                <Frame.BorderColor>
+                    <Color>Gray</Color>
+                </Frame.BorderColor>
+                <Frame.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android">
+                            <On.Value>
+                                0, 10, 0, 0
+                            </On.Value>
+                        </On>
+                    </OnPlatform>
+                </Frame.Margin>
+                        <!-- Sets up card body -->
+                <StackLayout Orientation="Horizontal">
+                    <!-- Box rim left-hand border color -->
+                    <!--  -->
+                    <!--  -->
+                    <!--  -->
+                    <!--  -->
+                    <BoxView Color="{Binding Screened}" WidthRequest="6"/>
+                    <!-- This is the grid for card setup -->
+                    <Grid VerticalOptions="CenterAndExpand"  
+                          Padding="0"  
+                          HorizontalOptions="FillAndExpand"  
+                          BackgroundColor="Transparent">
+                        <Grid.RowDefinitions>
+                            <!-- The rows in the card -->
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Top row in grid -->
+                        <Label FontAttributes="Bold"  
+                               Grid.Row="0"  
+                               HorizontalTextAlignment="Start"  
+                               VerticalTextAlignment="Center"  
+                               FontSize="16"  
+                               Text="{Binding ModuleId, Mode = TwoWay}">
+                            <Label.LineBreakMode>
+                                <LineBreakMode>NoWrap</LineBreakMode>
+                            </Label.LineBreakMode>
+                        </Label>
+                        <!-- Separator line -->
+                        <BoxView Grid.Row="1" Color="Gray"  
+                                 HorizontalOptions="FillAndExpand"  
+                                 HeightRequest="1"/>
+                        <!-- Detail row 1 -->
+                        <Grid Grid.Row="2"  
+                              BackgroundColor="Transparent"  
+                              Padding="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <!-- Left column: Description -->
+                            <Label Grid.Row="0"  
+                                   Grid.Column="0"  
+                                   Text="Screening date"/>
+                            <!-- Right column: Value -->
+                            <Label Grid.Row="0"  
+                                   Grid.Column="1"  
+                                   Text="{Binding CurDateTime, Mode = TwoWay}"/>
+                        </Grid>
+                        <!-- Detail row 2 -->
+                        <Grid Grid.Row="2"  
+                              BackgroundColor="Transparent"  
+                              Padding="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <!-- Left column: Description -->
+                            <Label Grid.Row="0"  
+                                   Grid.Column="0"  
+                                   Text="Screening result"/>
+                            <!-- Right column: Value -->
+                            <Label Grid.Row="0"  
+                                   Grid.Column="1"  
+                                   Text="{Binding Result, Mode = TwoWay}"/>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>
