@@ -18,6 +18,7 @@ namespace AGS.Mobile.Views
             #region ListViewSetup_Vad_XAML
             InitializeComponent();
             LstViewVad.ItemsSource = VadSurvey;
+            VadLabel.Text = "Select the relevant options for " + patient.Name +":";
             #endregion
             #region PopulateFromqGetSurvey_Vad_XAML
             var qSurvey = UtilDal.GetSurvey("Vad");
@@ -49,7 +50,7 @@ namespace AGS.Mobile.Views
                 // ClientData
                 Said = curPatient.Said,
                 // EnvironmentData
-                CurDateTime = DateTime.Today
+                CurDateTime = DateTime.Now
         };
             UtilDal.PostAnswer(answerVad);
             Navigation.PopModalAsync();

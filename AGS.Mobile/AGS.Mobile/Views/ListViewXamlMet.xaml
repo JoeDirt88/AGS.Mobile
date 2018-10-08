@@ -7,22 +7,84 @@
              Style="MainTheme">
     <StackLayout>
         <!-- Title info label -->
-        <Label Text="Please enter measurement of patient:"
-               FontSize="Small"
-               TextColor="Black"
-               HorizontalOptions="CenterAndExpand"
-               VerticalOptions="Start"/>
-        <ListView x:Name="LstViewMet">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <EntryCell Label="{Binding SurQuestion}"
-                               Text="{Binding TextData}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="5"
+               VerticalOptions="StartAndExpand"
+               BackgroundColor="LightCyan">
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <Label x:Name="MetLabel"
+                   FontSize="Medium"
+                   TextColor="Black"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Start"/>
+        </Frame>
+        <!-- Populating list view -->
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="0"
+               VerticalOptions="EndAndExpand"
+               BackgroundColor="SkyBlue" >
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <StackLayout>
+                <ListView x:Name="LstViewMet">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <EntryCell Label="{Binding SurQuestion}"
+                                       Text="{Binding TextData}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!-- Place new controls here -->
+                <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="0"  
+               VerticalOptions="End"
+               BackgroundColor="Accent" >
+                    <Frame.BorderColor>
+                        <Color>Black</Color>
+                    </Frame.BorderColor>
+                    <Frame.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android">
+                                <On.Value>
+                                    10, 10, 10, 10
+                                </On.Value>
+                            </On>
+                        </OnPlatform>
+                    </Frame.Margin>
+                    <StackLayout Padding="5">
+                        <!-- Action BTN -->
+                        <Button Text="Save Results"
+                                Clicked="Button_Clicked_MET_save"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
+
         <!-- Action BTN -->
-        <Button Text="Save Results"
-                Clicked="Button_Clicked_MET_save"
-                VerticalOptions="End"/>
+
     </StackLayout>
 </ContentPage>

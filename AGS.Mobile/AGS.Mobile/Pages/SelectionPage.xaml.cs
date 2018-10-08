@@ -16,6 +16,10 @@ namespace AGS.Mobile.Pages
         {
             InitializeComponent();
             curPatient = patient;
+            SelLabel.Text = "Please select the screening test that you would like to run for: " 
+                            + patient.Name 
+                            + " " 
+                            + patient.Surname;
         }
 
         /// <summary>

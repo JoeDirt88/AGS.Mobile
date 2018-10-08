@@ -28,5 +28,27 @@ namespace AGS.Mobile.ViewModel
             var birthday = new DateTime(yyyy, mm, dd);
             return (DateTime.Now.Year - birthday.Year).ToString();
         }
+
+        public static string ScreenConvert(string screening)
+        {
+            switch (screening)
+            {
+                case "True":
+                {
+                    return "Consult M.D.";
+                }
+                case "False":
+                {
+                    return "Healthy";
+                }
+                case "Null":
+                {
+                    return "Not enough information";
+                }
+                default:
+                    throw new Exception("Screening result conversion error");
+
+            }
+        }
     }
 }

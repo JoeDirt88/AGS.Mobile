@@ -25,7 +25,7 @@ namespace AGS.Mobile
         /// <returns>Full string of requestUri</returns>
         public static string Route(string controller)
         {
-            const string ip = @"192.168.0.11";
+            const string ip = @"196.252.75.110";
             const string port = "49805";
             var route = $@"/AGSoft/{controller}/";
             return @"http://" + ip + ":" + port + route;
@@ -102,10 +102,10 @@ namespace AGS.Mobile
         {
             const string medType = "application/json";
             var postData = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, medType);
-            var response = client.PostAsync(Route("Module"), postData).Result;
+            var response = client.PostAsync(Route("Python"), postData).Result;
             if (response.IsSuccessStatusCode != true)
             {
-                throw new Exception($"Response from server API Failed for POST {Route("Module")} no id, check IP config");
+                throw new Exception($"Response from server API Failed for POST {Route("Python")} no id, check IP config");
             }
         }
         #endregion
@@ -119,10 +119,10 @@ namespace AGS.Mobile
         /// <returns>bool "true" for new patient created, or "false" if patient already exists</returns>
         public static bool QueryNewClient(PatientInfoModel patient)
         {
-            var responseGet = client.GetAsync(Route("Patient") + $"{patient}").Result;
+            var responseGet = client.GetAsync(Route("Patient") + $"{patient.Said}").Result;
             var content = responseGet.IsSuccessStatusCode
                 ? JsonConvert.DeserializeObject<PatientInfoModel>(responseGet.Content.ReadAsStringAsync().Result)
-                : throw new Exception($"Response from server API Failed for GET {Route("Patient")} {patient.Said}, check IP config");
+                : throw new Exception($"Response from server API Failed for GET {Route("Patient")}{patient.Said}, check IP config");
             // If an ID is found on the db it will return "false"
             if (content.Said != "0") return false;
             // Serialize PatientInfo model for POST
@@ -152,6 +152,26 @@ namespace AGS.Mobile
                 : throw new Exception($"Response from server API Failed for GET {Route("Patient")}{patient.Said}, check IP config");
 
             return content;
+        }
+        #endregion
+
+        #region QueryModule_POST_Module_Name
+        /// <summary>
+        /// Description:    GET method to query the existence of an ID number in the client db.
+        /// Status:         Implemented
+        /// </summary>
+        /// <param name="module">ModuleID</param>
+        /// <returns>Module full name</returns>
+        public static string QueryModule(string module)
+        {
+            const string medType = "application/json";
+            var postData = new StringContent(JsonConvert.SerializeObject(module), Encoding.UTF8, medType);
+            var response = client.PostAsync(Route("Module"), postData).Result;
+            if (response.IsSuccessStatusCode != true)
+            {
+                throw new Exception($"Response from server API Failed for POST {Route("Module")} no id, check IP config");
+            }
+            return JsonConvert.DeserializeObject<string>(response.Content.ReadAsStringAsync().Result);
         }
         #endregion
     }

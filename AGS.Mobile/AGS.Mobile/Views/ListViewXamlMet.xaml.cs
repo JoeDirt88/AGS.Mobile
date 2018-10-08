@@ -18,6 +18,7 @@ namespace AGS.Mobile.Views
             #region ListViewSetup_Met_XAML
             InitializeComponent();
             LstViewMet.ItemsSource = MetSurvey;
+            MetLabel.Text = "Please enter the measurements for " + patient.Name + ":";
             #endregion
             #region PopulateFromqGetSurvey_Met_XAML
             var qSurvey = UtilDal.GetSurvey("Met");

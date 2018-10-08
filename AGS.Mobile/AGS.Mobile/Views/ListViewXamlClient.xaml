@@ -6,26 +6,87 @@
              Style="MainTheme">
     <StackLayout>
         <!-- Title info label -->
-        <Label Text="Please enter new patient details:"
-               FontSize="Medium"
-               TextColor="Black"
-               HorizontalOptions="CenterAndExpand"
-               VerticalOptions="Start"/>
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="5"
+               VerticalOptions="StartAndExpand"
+               BackgroundColor="LightCyan">
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <Label Text="Please enter new patient details:"
+                   FontSize="Medium"
+                   TextColor="Black"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Start"/>
+        </Frame>
         <!-- Populating list view -->
-        <ListView x:Name="LstViewCnt">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <EntryCell Label="{Binding SurQuestion}"
-                               Text="{Binding TextData}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <!-- Action BTN -->
-        <Button Text="Verify details"
-                Clicked="Button_Clicked_CNT_save"
-                VerticalOptions="End"/>
-        <Button Text="Cancel"
-                Clicked="Button_Clicked_RET"
-                VerticalOptions="End"/>
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="0"
+               VerticalOptions="EndAndExpand"
+               BackgroundColor="SkyBlue" >
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <StackLayout>
+                <ListView x:Name="LstViewCnt"
+                          VerticalOptions="Start">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <EntryCell Label="{Binding SurQuestion}"
+                                       Text="{Binding TextData}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!-- Place new controls here -->
+                <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="0"  
+               VerticalOptions="End"
+               BackgroundColor="Accent" >
+                    <Frame.BorderColor>
+                        <Color>Black</Color>
+                    </Frame.BorderColor>
+                    <Frame.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android">
+                                <On.Value>
+                                    10, 10, 10, 10
+                                </On.Value>
+                            </On>
+                        </OnPlatform>
+                    </Frame.Margin>
+                    <StackLayout Padding="5">
+                        <!-- Action BTN -->
+                        <Button Text="Verify details"
+                                Clicked="Button_Clicked_CNT_save"/>
+                        <BoxView Color="DarkSlateBlue"  
+                                 HorizontalOptions="FillAndExpand"
+                                 HeightRequest="1"/>
+                        <Button Text="Back"
+                                Clicked="Button_Clicked_RET"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
     </StackLayout>
 </ContentPage>

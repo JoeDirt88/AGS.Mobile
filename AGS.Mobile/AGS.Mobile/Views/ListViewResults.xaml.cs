@@ -15,26 +15,27 @@ namespace AGS.Mobile.Views
             // Initialise ListView
             #region ListViewSetup_Res_XAML
             InitializeComponent();
-            LstResults.ItemsSource = ResSurvey;
+            LstViewRes.ItemsSource = ResSurvey;
+            NameViewRes.Text = "Results for: " + patient.Name + " " + patient.Surname;
             #endregion
             // Populate view with data
             #region PopulateFromqGetSurvey_Res
             var qSurvey = UtilDal.GetResultList(patient.Said);
-            
+
             if (qSurvey.Any())
                 foreach (var que in qSurvey)
                 {
                     ResSurvey.Add(
-                        new ResultModel()
+                        new ResultModel
                         {
-                            ModuleId = que.ModuleId,
-                            Result = que.Result,
+                            ModuleId = UtilDal.QueryModule(que.ModuleId),
+                            Result = ConversionHelper.ScreenConvert(que.Result),
                             CurDateTime = que.CurDateTime,
                             Screened = que.Screened
                         });
                 }
             else
-                throw new Exception("Survey list is empty for Cnt");
+                throw new Exception($"Survey list is empty for Cnt {patient.Said}");
             #endregion
         }
 

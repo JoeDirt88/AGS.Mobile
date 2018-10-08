@@ -20,30 +20,26 @@
             <Frame IsClippedToBounds="True"
                    HasShadow="True"
                    Padding="0"  
-                   BackgroundColor="White" >
+                   BackgroundColor="Accent" >
                 <Frame.BorderColor>
-                    <Color>Gray</Color>
+                    <Color>Black</Color>
                 </Frame.BorderColor>
                 <Frame.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <On Platform="Android">
                             <On.Value>
-                                0, 10, 0, 0
+                                10, 10, 10, 10
                             </On.Value>
                         </On>
                     </OnPlatform>
                 </Frame.Margin>
-                        <!-- Sets up card body -->
+                <!-- Sets up card body -->
                 <StackLayout Orientation="Horizontal">
                     <!-- Box rim left-hand border color -->
-                    <!--  -->
-                    <!--  -->
-                    <!--  -->
-                    <!--  -->
-                    <BoxView Color="{Binding Screened}" WidthRequest="6"/>
+                    <BoxView Color="{Binding Screened}" WidthRequest="5"/>
                     <!-- This is the grid for card setup -->
                     <Grid VerticalOptions="CenterAndExpand"  
-                          Padding="0"  
+                          Padding="4"  
                           HorizontalOptions="FillAndExpand"  
                           BackgroundColor="Transparent">
                         <Grid.RowDefinitions>
@@ -54,24 +50,25 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <!-- Top row in grid -->
-                        <Label FontAttributes="Bold"  
-                               Grid.Row="0"  
-                               HorizontalTextAlignment="Start"  
-                               VerticalTextAlignment="Center"  
-                               FontSize="16"  
+                        <Label FontAttributes="Bold"
+                               TextColor="Black"
+                               Grid.Row="0"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"
+                               FontSize="16"
                                Text="{Binding ModuleId, Mode = TwoWay}">
                             <Label.LineBreakMode>
                                 <LineBreakMode>NoWrap</LineBreakMode>
                             </Label.LineBreakMode>
                         </Label>
                         <!-- Separator line -->
-                        <BoxView Grid.Row="1" Color="Gray"  
+                        <BoxView Grid.Row="1" Color="DarkSlateBlue"  
                                  HorizontalOptions="FillAndExpand"  
                                  HeightRequest="1"/>
                         <!-- Detail row 1 -->
                         <Grid Grid.Row="2"  
                               BackgroundColor="Transparent"  
-                              Padding="4">
+                              Padding="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
@@ -79,6 +76,7 @@
                             <!-- Left column: Description -->
                             <Label Grid.Row="0"  
                                    Grid.Column="0"  
+                                   TextColor="Black"
                                    Text="Screening date"/>
                             <!-- Right column: Value -->
                             <Label Grid.Row="0"  
@@ -86,9 +84,9 @@
                                    Text="{Binding CurDateTime, Mode = TwoWay}"/>
                         </Grid>
                         <!-- Detail row 2 -->
-                        <Grid Grid.Row="2"  
+                        <Grid Grid.Row="3"  
                               BackgroundColor="Transparent"  
-                              Padding="4">
+                              Padding="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
@@ -96,6 +94,7 @@
                             <!-- Left column: Description -->
                             <Label Grid.Row="0"  
                                    Grid.Column="0"  
+                                   TextColor="Black"
                                    Text="Screening result"/>
                             <!-- Right column: Value -->
                             <Label Grid.Row="0"  

@@ -16,7 +16,7 @@ namespace AGS.Mobile.Views
 
         public ListViewSuccess(PatientInfoModel patient, int i)
         {
-            #region ListViewSetup_Cnt_XAML
+            #region ListViewSetup_Scs_XAML
             InitializeComponent();
             LstViewScs.ItemsSource = CntSurvey;
             curPatient = patient;
@@ -24,6 +24,7 @@ namespace AGS.Mobile.Views
             #endregion
             #region PopulateFromqGetSurvey_Scs
             var qSurvey = UtilDal.GetSurvey("Cnt");
+
             var patientInfo = new List<string> {patient.Name, patient.Surname, patient.Said};
             var iterator=0;
             if (qSurvey.Any())
@@ -52,7 +53,6 @@ namespace AGS.Mobile.Views
                 default:
                     throw new Exception("Broke the welcome screen...HOW?");
             }
-            await Navigation.PushModalAsync(new SelectionPage(curPatient));
         }
         #endregion
 

@@ -9,25 +9,81 @@
 
     <StackLayout>
         <!-- Place new Messages here -->
-        <Label Text="Welcome to the AG Softworks medical screening application."
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="5"
+               VerticalOptions="StartAndExpand"
+               BackgroundColor="LightCyan">
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <Label Text="Welcome to the AG Softworks medical screening application"
                HorizontalOptions="CenterAndExpand"
                VerticalOptions="Start"
+               FontSize="Large"
+               TextColor="Black"/>
+        </Frame>
+        <!-- Nesting frames -->
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="0"
+               VerticalOptions="EndAndExpand"
+               BackgroundColor="SkyBlue" >
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <StackLayout>
+                <Label Text="Please select an option below to start:"
+               HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Start"
                FontSize="Medium"
                TextColor="Black"/>
-        <Label Text="Please select an option below to start:"
-               HorizontalOptions="Center"
-               VerticalOptions="Start"
-               FontSize="Small"
-               TextColor="Accent"/>
-        <!-- Place new controls here -->
-        <Button Text= "Existing Patient"
-                VerticalOptions="End"
-                Clicked="OLDButton_Clicked"/>
-        <Button Text= "New Patient"
-                VerticalOptions="End"
-                Clicked="NEWButton_Clicked"/>
-        <Button Text= "Patient Results"
-                VerticalOptions="End"
-                Clicked="RESButton_Clicked"/>
+                <!-- Place new controls here -->
+                <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="0"  
+               VerticalOptions="End"
+               BackgroundColor="Accent" >
+                    <Frame.BorderColor>
+                        <Color>Black</Color>
+                    </Frame.BorderColor>
+                    <Frame.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android">
+                                <On.Value>
+                                    10, 10, 10, 10
+                                </On.Value>
+                            </On>
+                        </OnPlatform>
+                    </Frame.Margin>
+                    <StackLayout Padding="5">
+                        <Button Text= "Existing Patient"
+                        Clicked="OLDButton_Clicked"/>
+                        <Button Text= "New Patient"
+                        Clicked="NEWButton_Clicked"/>
+                        <Button Text= "Patient Results"
+                        Clicked="RESButton_Clicked"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
     </StackLayout>
 </ContentPage>
