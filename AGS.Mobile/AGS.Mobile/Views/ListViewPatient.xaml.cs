@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using AGS.Mobile.Pages;
+using AGS.Mobile.Utilities;
 using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
 
 namespace AGS.Mobile.Views
 {
-    public partial class ListViewXamlPnt : ContentPage
+    public partial class ListViewPatient : ContentPage
     {
         private ObservableCollection<SurveyModel> PntSurvey { get; set; } = new ObservableCollection<SurveyModel>();
-        // This determines the case outcome for why the patient search is being done
         private int selection;
 
-        public ListViewXamlPnt(int i)
+        public ListViewPatient(int i)
         {
             #region ListViewSetup_Pnt_XAML
             InitializeComponent();
@@ -22,9 +22,13 @@ namespace AGS.Mobile.Views
             selection = i;
             #endregion
             #region PopulateFromqGetSurvey_Pnt_XAML
-            var qSurvey = UtilDal.GetSurvey("Cnt");
-
-            if (qSurvey.Any())
+            var qSurvey = UtilDal.GetSurvey("Cnt"); // MODULE
+            if (qSurvey == null)
+            {
+                ErrorHandle(new Exception($"Response from server API Failed.\r\n\r\n"
+                                          + "Please ensure that you are connected to the internet and try again"));
+            }
+            else
             {
                 foreach (var que in qSurvey)
                 {
@@ -33,12 +37,10 @@ namespace AGS.Mobile.Views
                 PntSurvey.RemoveAt(0);
                 PntSurvey.RemoveAt(0);
             }
-            else
-                throw new Exception("Survey list is empty for Cnt");
             #endregion
         }
 
-        #region ActionSaveCnt
+        #region ActionSavePatient
         private async void Button_Clicked_PNT_save(object sender, EventArgs e)
         {
             // Add on-screen values to a lst
@@ -49,7 +51,7 @@ namespace AGS.Mobile.Views
             }
             // Put list items into model
             var answerCnt = new PatientInfoModel {Name = string.Empty, Surname = string.Empty, Said = list};
-            // Send the ID number over to the DAL Utility to check the database
+
             var patient = UtilDal.QueryClient(answerCnt);
             if (patient.Said!="0")
             {
@@ -57,16 +59,14 @@ namespace AGS.Mobile.Views
             }
             else
             {
-                // This means a patient with that ID already exists
-                throw new Exception(@"This patient doesn't exists");
-                // Error page needs creation
+                ErrorHandle(new Exception($"This entry doesn't exists for ID: \r\n{answerCnt.Said}"));
             }
         }
         #endregion
 
-        private async void Button_Clicked_RET(object sender, EventArgs e)
-        {
-            await Navigation.PopModalAsync();
-        }
+        private async void Button_Clicked_RET(object sender, EventArgs e) => await Navigation.PopModalAsync();
+        
+        public async void ErrorHandle(Exception errException) => await Navigation.PushModalAsync(new ErrorPage(errException));
+        
     }
 }

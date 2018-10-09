@@ -1,6 +1,7 @@
 ﻿using System;
+using AGS.Mobile.Pages;
 
-namespace AGS.Mobile.ViewModel
+namespace AGS.Mobile.Utilities
 {
     internal class ConversionHelper
     {
@@ -31,24 +32,23 @@ namespace AGS.Mobile.ViewModel
 
         public static string ScreenConvert(string screening)
         {
+            string response;
             switch (screening)
             {
                 case "True":
-                {
-                    return "Consult M.D.";
-                }
+                    response = "Consult M.D.";
+                    break;
                 case "False":
-                {
-                    return "Healthy";
-                }
+                    response = "Healthy";
+                    break;
                 case "Null":
-                {
-                    return "Not enough information";
-                }
+                    response = "Not enough information";
+                    break;
                 default:
-                    throw new Exception("Screening result conversion error");
-
+                    response = "Screening result conversion error";
+                    break;
             }
+            return response;
         }
     }
 }

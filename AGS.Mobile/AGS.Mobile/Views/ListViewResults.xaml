@@ -6,170 +6,168 @@
              Title="Client Results"
              Style="MainTheme">
 
-    <ContentPage.Content>
-        <StackLayout>
-            <!-- Heading label -->
-            <Frame IsClippedToBounds="True"
+    <StackLayout>
+        <!-- Heading label -->
+        <Frame IsClippedToBounds="True"
                    HasShadow="True"
                    Padding="5"
                    VerticalOptions="Start"
                    BackgroundColor="LightCyan">
-                <Frame.BorderColor>
-                    <Color>Black</Color>
-                </Frame.BorderColor>
-                <Frame.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android">
-                            <On.Value>
-                                10, 10, 10, 10
-                            </On.Value>
-                        </On>
-                    </OnPlatform>
-                </Frame.Margin>
-                <Label x:Name="NameViewRes"
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <Label x:Name="NameViewRes"
                        FontSize="Medium"
                        TextColor="Black"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="Start"/>
-            </Frame>
-            <!-- List of cards with info -->
-            <StackLayout VerticalOptions="Start"
+        </Frame>
+        <!-- List of cards with info -->
+        <StackLayout VerticalOptions="StartAndExpand"
                          HorizontalOptions="CenterAndExpand"
                          IsClippedToBounds="True">
-                <ListView x:Name="LstViewRes"
+            <ListView x:Name="LstViewRes"
                               HasUnevenRows="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:Name="TemplateType">
-                            <ViewCell>
-                                <!-- Creates card -->
-                                <!-- Should look like
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="TemplateType">
+                        <ViewCell>
+                            <!-- Creates card -->
+                            <!-- Should look like
         |C|=================================|
         |O|[ModuleId]                       |
         |L|=================================|
         |O| Screening date    [CurDateTime] |
         |U| Screening result       [Result] |
         |R|=================================|-->
-                                <StackLayout>
-                                    <!-- Sets up the card frame -->
-                                    <Frame IsClippedToBounds="True" 
+                            <StackLayout>
+                                <!-- Sets up the card frame -->
+                                <Frame IsClippedToBounds="True" 
                                                HasShadow="True" 
-                                               Padding="10" 
+                                               Padding="2" 
                                                BackgroundColor="Accent" >
-                                        <Frame.BorderColor>
-                                            <Color>Black</Color>
-                                        </Frame.BorderColor>
-                                        <Frame.Margin>
-                                            <OnPlatform x:TypeArguments="Thickness">
-                                                <On Platform="Android">
-                                                    <On.Value>
-                                                        10, 10, 10, 10
-                                                    </On.Value>
-                                                </On>
-                                            </OnPlatform>
-                                        </Frame.Margin>
-                                        <!-- Sets up card body -->
-                                        <StackLayout Orientation="Horizontal">
-                                            <!-- Box rim left-hand border color -->
-                                            <BoxView Color="{Binding Screened}" 
+                                    <Frame.BorderColor>
+                                        <Color>Black</Color>
+                                    </Frame.BorderColor>
+                                    <Frame.Margin>
+                                        <OnPlatform x:TypeArguments="Thickness">
+                                            <On Platform="Android">
+                                                <On.Value>
+                                                    10, 10, 10, 10
+                                                </On.Value>
+                                            </On>
+                                        </OnPlatform>
+                                    </Frame.Margin>
+                                    <!-- Sets up card body -->
+                                    <StackLayout Orientation="Horizontal">
+                                        <!-- Box rim left-hand border color -->
+                                        <BoxView Color="{Binding Screened}" 
                                                          WidthRequest="8"/>
-                                            <!-- This is the grid for card setup -->
-                                            <Grid VerticalOptions="CenterAndExpand" 
+                                        <!-- This is the grid for card setup -->
+                                        <Grid VerticalOptions="CenterAndExpand" 
                                                       Padding="2"
                                                       HorizontalOptions="FillAndExpand" 
                                                       BackgroundColor="Transparent">
-                                                <Grid.RowDefinitions>
-                                                    <!-- The rows in the card -->
-                                                    <RowDefinition Height="*"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="*"/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
-                                                <!-- Top row in grid -->
-                                                <Label FontAttributes="Bold" 
+                                            <Grid.RowDefinitions>
+                                                <!-- The rows in the card -->
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <!-- Top row in grid -->
+                                            <Label FontAttributes="Bold" 
                                                            TextColor="Black" 
                                                            Grid.Row="0"
                                                            HorizontalTextAlignment="Start" 
                                                            VerticalTextAlignment="Center" 
                                                            FontSize="16" 
                                                            Text="{Binding ModuleId, Mode = TwoWay}">
-                                                    <Label.LineBreakMode>
-                                                        <LineBreakMode>NoWrap</LineBreakMode>
-                                                    </Label.LineBreakMode>
-                                                </Label>
-                                                <!-- Separator line -->
-                                                <BoxView Grid.Row="1" 
+                                                <Label.LineBreakMode>
+                                                    <LineBreakMode>NoWrap</LineBreakMode>
+                                                </Label.LineBreakMode>
+                                            </Label>
+                                            <!-- Separator line -->
+                                            <BoxView Grid.Row="1" 
                                                              Color="DarkSlateBlue" 
                                                              HorizontalOptions="FillAndExpand" 
                                                              HeightRequest="1"/>
-                                                <!-- Detail row 1 -->
-                                                <Grid Grid.Row="2" 
+                                            <!-- Detail row 1 -->
+                                            <Grid Grid.Row="2" 
                                                           BackgroundColor="Transparent" 
                                                           Padding="1">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition />
-                                                    </Grid.ColumnDefinitions>
-                                                    <!-- Left column: Description -->
-                                                    <Label Grid.Row="0" 
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <!-- Left column: Description -->
+                                                <Label Grid.Row="0" 
                                                                Grid.Column="0" 
                                                                TextColor="Black" 
                                                                Text="Screening date"/>
-                                                    <!-- Right column: Value -->
-                                                    <Label Grid.Row="0" 
+                                                <!-- Right column: Value -->
+                                                <Label Grid.Row="0" 
                                                                Grid.Column="1" 
                                                                Text="{Binding CurDateTime, Mode = TwoWay}"/>
-                                                </Grid>
-                                                <!-- Detail row 2 -->
-                                                <Grid Grid.Row="3" 
+                                            </Grid>
+                                            <!-- Detail row 2 -->
+                                            <Grid Grid.Row="3" 
                                                           BackgroundColor="Transparent" 
                                                           Padding="1">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition />
-                                                    </Grid.ColumnDefinitions>
-                                                    <!-- Left column: Description -->
-                                                    <Label Grid.Row="0"
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <!-- Left column: Description -->
+                                                <Label Grid.Row="0"
                                                                Grid.Column="0"
                                                                TextColor="Black"
                                                                Text="Screening result"/>
-                                                    <!-- Right column: Value -->
-                                                    <Label Grid.Row="0"
+                                                <!-- Right column: Value -->
+                                                <Label Grid.Row="0"
                                                                Grid.Column="1"
                                                                Text="{Binding Result, Mode = TwoWay}"/>
-                                                </Grid>
                                             </Grid>
-                                        </StackLayout>
-                                    </Frame>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-            <!-- Place new controls here -->
-            <Frame IsClippedToBounds="True"
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <!-- Place new controls here -->
+        <Frame IsClippedToBounds="True"
                HasShadow="True"
                Padding="2"  
                VerticalOptions="End"
                BackgroundColor="Accent" >
-                <Frame.BorderColor>
-                    <Color>Black</Color>
-                </Frame.BorderColor>
-                <Frame.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android">
-                            <On.Value>
-                                10, 10, 10, 10
-                            </On.Value>
-                        </On>
-                    </OnPlatform>
-                </Frame.Margin>
-                <StackLayout Padding="5">
-                    <!-- Action BTN -->
-                    <Button Text="Cancel"
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <StackLayout Padding="5">
+                <!-- Action BTN -->
+                <Button Text="Cancel"
                             Clicked="Button_Clicked_RET"/>
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-    </ContentPage.Content>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
 </ContentPage>

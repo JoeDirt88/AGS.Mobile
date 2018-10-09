@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using AGS.Mobile.Pages;
+using AGS.Mobile.Utilities;
 using AGS.Mobile.ViewModel;
 using Xamarin.Forms;
 
@@ -25,16 +26,21 @@ namespace AGS.Mobile.Views
             #region PopulateFromqGetSurvey_Scs
             var qSurvey = UtilDal.GetSurvey("Cnt");
 
-            var patientInfo = new List<string> {patient.Name, patient.Surname, patient.Said};
-            var iterator=0;
+            var patientInfo = new List<string> { patient.Name, patient.Surname, patient.Said };
+            var iterator = 0;
             if (qSurvey.Any())
                 foreach (var que in qSurvey)
                 {
-                    CntSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = patientInfo[iterator]});
+                    CntSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = patientInfo[iterator] });
                     iterator++;
                 }
             else
-                throw new Exception("Survey list is empty for Cnt");
+            {
+                ErrorHandle(new Exception($"The patient information database is not connected:"
+                                          + $"\r\nPlease ensure that your internet connection is active, and try again."
+                                          + $"\r\n"
+                                          + $"\r\nIf the problem persists, please contact us on our support page."));
+            }
             #endregion
         }
 
@@ -51,7 +57,11 @@ namespace AGS.Mobile.Views
                     await Navigation.PushModalAsync(new ListViewResults(curPatient));
                     break;
                 default:
-                    throw new Exception("Broke the welcome screen...HOW?");
+                    {
+                        ErrorHandle(new Exception($"It seems the page you want to visit is under maintenance:"
+                                            + $"\r\nPlease try again later."));
+                    }
+                    break;
             }
         }
         #endregion
@@ -62,5 +72,10 @@ namespace AGS.Mobile.Views
             Navigation.PopAsync();
         }
         #endregion
+
+        public async void ErrorHandle(Exception errException)
+        {
+            await Navigation.PushModalAsync(new ErrorPage(errException));
+        }
     }
 }

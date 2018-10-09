@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using Xamarin.Forms;
 using AGS.Mobile.Views;
 
@@ -13,32 +14,35 @@ namespace AGS.Mobile.Pages
             Debug.WriteLine("Hello");
         }
 
-        #region ExistingPatientBTN
+        #region Buttons
+        #region Existing Patient
         /// <summary>
-        /// Description:    Takes the user to existing patient page
-        /// Status:         Implemented
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void OLDButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewXamlPnt(0));
+        private async void OLDButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewPatient(0));
         #endregion
-        #region NewPatientBTN
+
+        #region New Patient
         /// <summary>
-        /// Description:    Takes user to the create new patient file page
-        /// Status:         Implemented
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void NEWButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewXamlCnt());
+        private async void NEWButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewClient());
         #endregion
-        #region PatientInfoBTN
+
+        #region Patient Info
         /// <summary>
-        /// Description:    Takes user to patient results page
-        /// Status:         Implemented
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void RESButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewXamlPnt(1));
+        private async void RESButton_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new ListViewPatient(1));
         #endregion
+
+        #endregion
+        
     }
 }

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AGS.Mobile.Views.ListViewXamlCnt"
-             Title="Client Data"
+             x:Class="AGS.Mobile.Views.ListViewModVad"
+             Title="Vitamin A deficiency"
              Style="MainTheme">
     <StackLayout>
         <!-- Title info label -->
@@ -23,7 +23,7 @@
                     </On>
                 </OnPlatform>
             </Frame.Margin>
-            <Label Text="Please enter new patient details:"
+            <Label x:Name="VadLabel"
                    FontSize="Medium"
                    TextColor="Black"
                    HorizontalOptions="CenterAndExpand"
@@ -48,12 +48,11 @@
                 </OnPlatform>
             </Frame.Margin>
             <StackLayout>
-                <ListView x:Name="LstViewCnt"
-                          VerticalOptions="Start">
+                <ListView x:Name="LstViewVad">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <EntryCell Label="{Binding SurQuestion}"
-                                       Text="{Binding TextData}" />
+                            <SwitchCell Text="{Binding SurQuestion}"
+                                        On="{Binding IsTrue}" />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -77,13 +76,8 @@
                     </Frame.Margin>
                     <StackLayout Padding="5">
                         <!-- Action BTN -->
-                        <Button Text="Verify details"
-                                Clicked="Button_Clicked_CNT_save"/>
-                        <BoxView Color="DarkSlateBlue"  
-                                 HorizontalOptions="FillAndExpand"
-                                 HeightRequest="1"/>
-                        <Button Text="Back"
-                                Clicked="Button_Clicked_RET"/>
+                        <Button Text="Save Results"
+                                Clicked="Button_Clicked_VAD_save"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>

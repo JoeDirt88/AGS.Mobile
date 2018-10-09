@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using AGS.Mobile.ViewModel;
+using AGS.Mobile.Utilities;
 using Xamarin.Forms;
 
 namespace AGS.Mobile.Views
 {
-    public partial class ListViewXamlCnt : ContentPage
+    public partial class ListViewClient : ContentPage
     {
         private ObservableCollection<SurveyModel> CntSurvey { get; set; } = new ObservableCollection<SurveyModel>();
 
-        public ListViewXamlCnt()
+        public ListViewClient()
         {
             #region ListViewSetup_Cnt_XAML
             InitializeComponent();
@@ -42,7 +42,7 @@ namespace AGS.Mobile.Views
             // Put list items into model
             var answerCnt = new PatientInfoModel {Name = list[0], Surname = list[1], Said = list[2]};
             // Send the ID number over to the DAL Utility to check the database
-            if (UtilDal.QueryNewClient(answerCnt) == true)
+            if (UtilDal.PostNewClient(answerCnt) == true)
             {
                 // This means that the creation was a success
 

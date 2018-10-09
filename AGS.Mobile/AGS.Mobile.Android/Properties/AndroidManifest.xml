@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="Prototype" package="com.AGS.Mobile.Android" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="AGSoftworks_Medical.Prototype" android:installLocation="auto" android:versionName="Prototype" android:versionCode="3">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:label="AGSoft Medical Screener" android:icon="@drawable/icon"></application>
+	<application android:label="AGSoft Medical Screening" android:icon="@drawable/icon"></application>
 </manifest>

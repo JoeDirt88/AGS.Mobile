@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using AGS.Mobile.ViewModel;
+using AGS.Mobile.Utilities;
 using AGS.Mobile.Views;
 using Xamarin.Forms;
 
 namespace AGS.Mobile.Pages
 {
-    
+
 
     public partial class SelectionPage : ContentPage
     {
@@ -16,9 +15,9 @@ namespace AGS.Mobile.Pages
         {
             InitializeComponent();
             curPatient = patient;
-            SelLabel.Text = "Please select the screening test that you would like to run for: " 
-                            + patient.Name 
-                            + " " 
+            SelLabel.Text = "Please select the screening test that you would like to run for: "
+                            + patient.Name
+                            + " "
                             + patient.Surname;
         }
 
@@ -30,19 +29,7 @@ namespace AGS.Mobile.Pages
         /// <param name="e"></param>
         private async void VADButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new ListViewXamlVad(curPatient));
-        }
-
-        /// <summary>
-        /// Description:    This button event takes the user to the Bitot's Spot module
-        /// Status:         Not Implemented
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void BitButton_Clicked(object sender, EventArgs e)
-        {
-            // does nothing yet
-            await Navigation.PushModalAsync(new SelectionPage(curPatient));
+            await Navigation.PushModalAsync(new ListViewModVad(curPatient));
         }
 
         /// <summary>
@@ -53,7 +40,7 @@ namespace AGS.Mobile.Pages
         /// <param name="e"></param>
         private async void MetButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new ListViewXamlMet(curPatient));
+            await Navigation.PushModalAsync(new ListViewModMet(curPatient));
         }
 
         private async void Button_Clicked_RET(object sender, EventArgs e)

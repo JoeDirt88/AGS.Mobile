@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using AGS.Mobile.ViewModel;
+using AGS.Mobile.Pages;
+using AGS.Mobile.Utilities;
 using Xamarin.Forms;
 
 namespace AGS.Mobile.Views
 {
-    public partial class ListViewXamlMet : ContentPage
+    public partial class ListViewModMet : ContentPage
     {
         private ObservableCollection<SurveyModel> MetSurvey { get; set; } = new ObservableCollection<SurveyModel>();
         private PatientInfoModel curPatient;
 
-        public ListViewXamlMet(PatientInfoModel patient)
+        public ListViewModMet(PatientInfoModel patient)
         {
             curPatient = patient;
             #region ListViewSetup_Met_XAML
@@ -20,16 +21,22 @@ namespace AGS.Mobile.Views
             LstViewMet.ItemsSource = MetSurvey;
             MetLabel.Text = "Please enter the measurements for " + patient.Name + ":";
             #endregion
+
             #region PopulateFromqGetSurvey_Met_XAML
             var qSurvey = UtilDal.GetSurvey("Met");
 
             if (qSurvey.Any())
                 foreach (var que in qSurvey)
                 {
-                    MetSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = string.Empty});
+                    MetSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = string.Empty });
                 }
             else
-                throw new Exception("Survey list is empty for Met");
+            {
+                ErrorHandle(new Exception($"Survey list was accessible for Metabolic Syndrome screening:"
+                                          + $"\r\nPlease ensure that your internet connection is active, and try again."
+                                          + $"\r\n"
+                                          + $"\r\nIf the problem persists, please contact us on our support page."));
+            }
             #endregion
         }
 
@@ -59,6 +66,10 @@ namespace AGS.Mobile.Views
             Navigation.PopModalAsync();
         }
         #endregion
-        
+
+        public async void ErrorHandle(Exception errException)
+        {
+            await Navigation.PushModalAsync(new ErrorPage(errException));
+        }
     }
 }

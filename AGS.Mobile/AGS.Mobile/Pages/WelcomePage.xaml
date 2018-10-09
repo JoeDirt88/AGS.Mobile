@@ -50,7 +50,7 @@
                     </On>
                 </OnPlatform>
             </Frame.Margin>
-            <StackLayout>
+            <StackLayout Padding="5">
                 <Label Text="Please select an option below to start:"
                HorizontalOptions="CenterAndExpand"
                        VerticalOptions="Start"

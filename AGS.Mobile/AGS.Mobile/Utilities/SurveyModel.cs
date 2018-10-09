@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xamarin.Forms;
 
-namespace AGS.Mobile.ViewModel
+namespace AGS.Mobile.Utilities
 {
     public class SurveyModel
     {

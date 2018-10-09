@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AGS.Mobile"
+             x:Class="AGS.Mobile.Pages.ErrorPage"
+             Title="AG Softworks"
+             Icon="@drawable/icon"
+             Resources="Icon.png">
+    <StackLayout>
+        <!-- ErrorPage Header -->
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="5"
+               VerticalOptions="StartAndExpand"
+               BackgroundColor="LightCoral">
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <Label x:Name="HeadLabel"
+                   FontSize="Medium"
+                   TextColor="Black"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Start"/>
+        </Frame>
+        <!-- Error message -->
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="0"  
+               VerticalOptions="CenterAndExpand"
+               BackgroundColor="LightPink" >
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <StackLayout Padding="5">
+                <Label x:Name="ErrLabel"
+                       FontSize="Medium"
+                       TextColor="Black"
+                       HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </Frame>
+        <!-- Controls -->
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="0"  
+               VerticalOptions="End"
+               BackgroundColor="Accent" >
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            10, 10, 10, 10
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <StackLayout Padding="5">
+                <!-- Place new controls here -->
+                <Button Text="Return Home"
+                        Clicked="Button_Clicked_RET"/>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

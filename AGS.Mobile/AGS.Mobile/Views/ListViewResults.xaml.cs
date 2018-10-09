@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using AGS.Mobile.ViewModel;
+using AGS.Mobile.Pages;
+using AGS.Mobile.Utilities;
 using Xamarin.Forms;
 
 namespace AGS.Mobile.Views
@@ -20,9 +20,14 @@ namespace AGS.Mobile.Views
             #endregion
             // Populate view with data
             #region PopulateFromqGetSurvey_Res
-            var qSurvey = UtilDal.GetResultList(patient.Said);
+            var qSurvey = UtilDal.GetResultList(patient.Said); //VALUES
 
-            if (qSurvey.Any())
+            if (qSurvey == null)
+            {
+                ErrorHandle(new Exception($"Result list is empty for Patient with ID: \r\n{patient.Said}"));
+            }
+            else
+            {
                 foreach (var que in qSurvey)
                 {
                     ResSurvey.Add(
@@ -34,8 +39,8 @@ namespace AGS.Mobile.Views
                             Screened = que.Screened
                         });
                 }
-            else
-                throw new Exception($"Survey list is empty for Cnt {patient.Said}");
+            }
+
             #endregion
         }
 
@@ -46,6 +51,11 @@ namespace AGS.Mobile.Views
                 Navigation.PopModalAsync();
             }
             await Navigation.PopModalAsync();
+        }
+
+        public async void ErrorHandle(Exception errException)
+        {
+            await Navigation.PushModalAsync(new ErrorPage(errException));
         }
     }
 }
