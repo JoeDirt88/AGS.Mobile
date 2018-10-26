@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:AGS.Mobile.ViewModel;assembly=AGS.Mobile"
+             x:Class="AGS.Mobile.Feedback.Ueq">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- Page Label -->
+            <Frame IsClippedToBounds="True"
+                   HasShadow="True"
+                   Padding="5"
+                   VerticalOptions="StartAndExpand"
+                   BackgroundColor="LightCyan">
+                <Frame.BorderColor>
+                    <Color>Black</Color>
+                </Frame.BorderColor>
+                <Frame.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android">
+                            <On.Value>
+                                10, 10, 10, 10
+                            </On.Value>
+                        </On>
+                    </OnPlatform>
+                </Frame.Margin>
+                <Label Text="Welcome to the feedback page for the A.G. Soft medical screening application"
+                       FontSize="Medium"
+                       TextColor="Black"
+                       HorizontalOptions="CenterAndExpand"/>
+            </Frame>
+            <!-- Info Label -->
+            <!-- Survey -->
+            <Frame IsClippedToBounds="True"
+                   HasShadow="True"
+                   Padding="5"
+                   VerticalOptions="StartAndExpand"
+                   BackgroundColor="LightCyan">
+                <Frame.BorderColor>
+                    <Color>Black</Color>
+                </Frame.BorderColor>
+                <Frame.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android">
+                            <On.Value>
+                                10, 10, 10, 10
+                            </On.Value>
+                        </On>
+                    </OnPlatform>
+                </Frame.Margin>
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Bad"
+                               Grid.Column="0"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="End"/>
+                        <Image Source="@drawable/Sad1.png"
+                               Grid.Column="1"
+                               HorizontalOptions="Center"/>
+                        <Image Source="@drawable/Sad0.png"
+                               Grid.Column="2"
+                               HorizontalOptions="Center"/>
+                        <Image Source="@drawable/Meh.png"
+                               Grid.Column="3"
+                               HorizontalOptions="Center"/>
+                        <Image Source="@drawable/Glad0.png"
+                               Grid.Column="4"
+                               HorizontalOptions="Center"/>
+                        <Image Source="@drawable/Glad1.png"
+                               Grid.Column="5"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Good"
+                               Grid.Column="6"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Start"/>
+                    </Grid>
+
+                    <!-- -->
+                    <StackLayout>
+                        <ListView x:Name="SurveyList"
+                              HasUnevenRows="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <viewModel:ViewCellTextSliderText/>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+
+                    </StackLayout>
+                    <!-- Page Controls -->
+                    <Frame IsClippedToBounds="True"
+                           HasShadow="True"
+                           Padding="0"  
+                           VerticalOptions="End"
+                           BackgroundColor="Accent" >
+                        <Frame.BorderColor>
+                            <Color>Black</Color>
+                        </Frame.BorderColor>
+                        <Frame.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="Android">
+                                    <On.Value>
+                                        0, 0, 0, 0
+                                    </On.Value>
+                                </On>
+                            </OnPlatform>
+                        </Frame.Margin>
+                        <StackLayout Padding="3">
+                            <!-- Action BTN -->
+                            <!-- BTN -->
+                            <Button Text="Continue"
+                                    FontSize="Small"
+                                    Clicked="BTN_NXT"/>
+                            <!-- LINE -->
+                            <BoxView Color="DarkSlateBlue"  
+                                     HorizontalOptions="FillAndExpand"
+                                     HeightRequest="1"/>
+                            <!-- BTN -->
+                            <Button Text="Back"
+                                    FontSize="Small"
+                                    Clicked="BTN_RET"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+            <!--  -->
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

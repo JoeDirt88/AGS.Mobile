@@ -47,4 +47,12 @@ namespace AGS.Mobile.Utilities
         // EnvironmentData
         public DateTime CurDateTime { get; set; }
     }
+
+    public class UxSurvey
+    {
+        public string Question { get; set; }
+        public string Left { get; set; }
+        public int Slider { get; set; }
+        public string Right { get; set; }
+    }
 }

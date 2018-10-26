@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using AGS.Mobile.Pages;
 using Newtonsoft.Json;
-using Xamarin.Forms;
 
 namespace AGS.Mobile.Utilities
 {
@@ -27,7 +25,7 @@ namespace AGS.Mobile.Utilities
         /// <returns>Full string of requestUri</returns>
         public static string Route(string controller)
         {
-            const string ip = @"196.252.75.110";
+            const string ip = @"192.168.88.195";
             const string port = "49805";
             var route = $@"/AGSoft/{controller}/";
             return @"http://" + ip + ":" + port + route;
@@ -156,7 +154,7 @@ namespace AGS.Mobile.Utilities
         #region VALUES AGSoft/Values
         // GET()
         #region Get() /
-            
+
         #endregion
         // GET(id)
         #region GetResultList() /{id}
@@ -179,11 +177,37 @@ namespace AGS.Mobile.Utilities
 
         #endregion
 
+        #region FEEDBACK AGSoft/Values
+        // GET()
+        #region Get() /
+
+        #endregion
+        // GET(id)
+        #region GetResultList() /{id}
+
+        public static List<UxSurvey> FeedbackSurvey()
+        {
+            var response = client.GetAsync(Route("Feedback")).Result;
+            var content = response.IsSuccessStatusCode
+                ? response.Content.ReadAsStringAsync().Result
+                : throw new Exception($"Response from server API Failed for GET {Route("Feedback")}, check IP config");
+
+            return JsonConvert.DeserializeObject<List<UxSurvey>>(content);
+        }
+        #endregion
+        // POST(value)
+
+        // PUT(value)
+
+        // Delete(id)
+
         #endregion
 
+        #endregion
+
+
+
         #region ErrorHandler
-
-
 
         #endregion
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using AGS.Mobile.Feedback;
 using Xamarin.Forms;
 using AGS.Mobile.Views;
 
@@ -43,6 +44,10 @@ namespace AGS.Mobile.Pages
         #endregion
 
         #endregion
-        
+
+        private async void Feedback_Click(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new Ueq());
+        }
     }
 }

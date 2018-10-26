@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AGS.Mobile.ViewModel.ViewCellTextSliderText">
+
+    <ViewCell.View>
+        <Frame IsClippedToBounds="True"
+               HasShadow="True"
+               Padding="5"
+               VerticalOptions="StartAndExpand"
+               BackgroundColor="White">
+            <Frame.BorderColor>
+                <Color>Black</Color>
+            </Frame.BorderColor>
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android">
+                        <On.Value>
+                            2, 2, 2, 2
+                        </On.Value>
+                    </On>
+                </OnPlatform>
+            </Frame.Margin>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="125"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding Left}"
+                       Grid.Column="0"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       FontSize="Micro"
+                       HorizontalTextAlignment="End"
+                       VerticalTextAlignment="Center"/>
+                <Slider Grid.Column="1"
+                        MinimumTrackColor="LightCoral"
+                        MaximumTrackColor="Green"
+                        ThumbColor="DimGray"
+                        Value="2"
+                        Maximum="4"
+                        Minimum="0"
+                        ValueChanged="Slider_OnValueChanged" />
+                <Label Text="{Binding Right}"
+                       Grid.Column="2"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       FontSize="Micro"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"/>
+            </Grid>
+        </Frame>
+    </ViewCell.View>
+</ViewCell>

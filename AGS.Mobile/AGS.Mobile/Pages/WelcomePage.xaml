@@ -4,15 +4,14 @@
              xmlns:local="clr-namespace:AGS.Mobile"
              x:Class="AGS.Mobile.Pages.WelcomePage"
              Title="AG Softworks"
-             Icon="@drawable/icon"
-             Resources="Icon.png">
+             Icon="@drawable/icon">
 
     <StackLayout>
         <!-- Place new Messages here -->
         <Frame IsClippedToBounds="True"
                HasShadow="True"
                Padding="5"
-               VerticalOptions="StartAndExpand"
+               VerticalOptions="Start"
                BackgroundColor="LightCyan">
             <Frame.BorderColor>
                 <Color>Black</Color>
@@ -32,6 +31,13 @@
                FontSize="Large"
                TextColor="Black"/>
         </Frame>
+        <Button HorizontalOptions="End"
+                VerticalOptions="Start"
+                Text="Feedback"
+                Clicked="Feedback_Click"
+                BackgroundColor="DarkSlateBlue"
+                FontSize="Small"
+                Margin="0,0,10,0"/>
         <!-- Nesting frames -->
         <Frame IsClippedToBounds="True"
                HasShadow="True"
