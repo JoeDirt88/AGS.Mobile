@@ -31,7 +31,7 @@ namespace AGS.Mobile.Views
             if (qSurvey.Any())
                 foreach (var que in qSurvey)
                 {
-                    CntSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = patientInfo[iterator] });
+                    CntSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = patientInfo[iterator] , Significance = que.Significance });
                     iterator++;
                 }
             else
@@ -67,9 +67,9 @@ namespace AGS.Mobile.Views
         #endregion
 
         #region Button_Clicked_N
-        private void Button_Clicked_N(object sender, EventArgs e)
+        private async void Button_Clicked_N(object sender, EventArgs e)
         {
-            Navigation.PopAsync();
+            await Navigation.PopModalAsync();
         }
         #endregion
 

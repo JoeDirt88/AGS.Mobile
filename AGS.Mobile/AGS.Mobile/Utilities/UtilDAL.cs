@@ -25,7 +25,7 @@ namespace AGS.Mobile.Utilities
         /// <returns>Full string of requestUri</returns>
         public static string Route(string controller)
         {
-            const string ip = @"192.168.88.195";
+            const string ip = @"143.160.105.192";
             const string port = "49805";
             var route = $@"/AGSoft/{controller}/";
             return @"http://" + ip + ":" + port + route;

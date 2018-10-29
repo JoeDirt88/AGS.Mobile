@@ -44,7 +44,7 @@ namespace AGS.Mobile.Feedback
 
         private async void BTN_RET(object sender, EventArgs e)
         {
-            for (var i = 0; i < (Navigation.ModalStack.Count); i++)
+            for (var i = 0; i < (Navigation.ModalStack.Count-1); i++)
             {
                 Navigation.PopModalAsync();
             }

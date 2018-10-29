@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:AGS.Mobile.ViewModel;assembly=AGS.Mobile"
              x:Class="AGS.Mobile.Views.ListViewClient"
              Title="Client Data"
              Style="MainTheme">
@@ -49,11 +50,11 @@
             </Frame.Margin>
             <StackLayout>
                 <ListView x:Name="LstViewCnt"
+                          HasUnevenRows="True"
                           VerticalOptions="Start">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <EntryCell Label="{Binding SurQuestion}"
-                                       Text="{Binding TextData}" />
+                            <viewModel:ViewCellLabelEntry/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

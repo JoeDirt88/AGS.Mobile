@@ -50,10 +50,11 @@
                 </OnPlatform>
             </Frame.Margin>
             <StackLayout>
-                <ListView x:Name="LstViewMet">
+                <ListView x:Name="LstViewMet"
+                          HasUnevenRows="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <viewModel:ViewCellLabelEntry/>
+                            <viewModel:ViewCellLabelEntryUnit/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

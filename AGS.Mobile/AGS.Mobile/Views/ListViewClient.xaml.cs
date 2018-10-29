@@ -23,7 +23,7 @@ namespace AGS.Mobile.Views
             if (qSurvey.Any())
                 foreach (var que in qSurvey)
                 {
-                    CntSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = string.Empty});
+                    CntSurvey.Add(new SurveyModel() {SurQuestion = que.Question, TextData = string.Empty , Significance = que.Significance });
                 }
             else
                 throw new Exception("Survey list is empty for Cnt");

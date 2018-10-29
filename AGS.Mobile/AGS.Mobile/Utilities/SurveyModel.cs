@@ -8,6 +8,7 @@ namespace AGS.Mobile.Utilities
         public string SurQuestion { get; set; }
         public bool IsTrue { get; set; }
         public string TextData { get; set; }
+        public string Significance { get; set; }
     }
 
     public class ResultModel
@@ -25,6 +26,7 @@ namespace AGS.Mobile.Utilities
     {
         public string Qid { get; set; }
         public string Question { get; set; }
+        public string Significance { get; set; }
     }
 
     public class PatientInfoModel

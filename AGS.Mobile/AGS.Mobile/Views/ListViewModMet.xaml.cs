@@ -28,7 +28,7 @@ namespace AGS.Mobile.Views
             if (qSurvey.Any())
                 foreach (var que in qSurvey)
                 {
-                    MetSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = string.Empty });
+                    MetSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = string.Empty , Significance = que.Significance});
                 }
             else
             {

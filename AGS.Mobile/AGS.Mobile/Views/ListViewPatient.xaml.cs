@@ -32,7 +32,7 @@ namespace AGS.Mobile.Views
             {
                 foreach (var que in qSurvey)
                 {
-                    PntSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = string.Empty });
+                    PntSurvey.Add(new SurveyModel() { SurQuestion = que.Question, TextData = string.Empty , Significance = que.Significance });
                 }
                 PntSurvey.RemoveAt(0);
                 PntSurvey.RemoveAt(0);

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AGS.Mobile.ViewModel.ViewCellLabelEntry">
+             x:Class="AGS.Mobile.ViewModel.ViewCellLabelEntryUnit">
 
     <ViewCell.View>
         <Frame IsClippedToBounds="True"
@@ -28,20 +28,21 @@
                 </Grid.ColumnDefinitions>
                 <!-- This is the left-hand label -->
                 <Label Text="{Binding SurQuestion}"
-                       Grid.Column="0"
-                       TextColor="Black"
-                       FontAttributes="Bold"
-                       FontSize="Medium"
-                       HorizontalTextAlignment="Start"
-                       VerticalTextAlignment="Center"/>
+                       WidthRequest="150"
+                     Grid.Column="0"
+                     TextColor="Black"
+                     FontAttributes="Bold"
+                     FontSize="Small"
+                     HorizontalTextAlignment="Start"
+                     VerticalTextAlignment="Center"/>
 
                 <!-- This is the right-hand EntryCell -->
                 <Frame Grid.Column="1" 
-                       IsClippedToBounds="True"
-                       HasShadow="True"
-                       Padding="0"
-                       VerticalOptions="CenterAndExpand"
-                       BackgroundColor="LightBlue">
+                     IsClippedToBounds="True"
+                     HasShadow="True"
+                     Padding="0"
+                     VerticalOptions="StartAndExpand"
+                     BackgroundColor="LightBlue">
                     <Frame.BorderColor>
                         <Color>Black</Color>
                     </Frame.BorderColor>
@@ -54,17 +55,28 @@
                             </On>
                         </OnPlatform>
                     </Frame.Margin>
-                    <Entry Text="{Binding TextData}"
-                           HorizontalTextAlignment="Center"
-                           VerticalOptions="End"
-                           IsVisible="True"
-                           BackgroundColor="Transparent"
-                           TextColor="DarkSlateBlue"
-                           PlaceholderColor="LightSlateGray"
-                           Placeholder="{Binding Significance}"
-                           IsEnabled="True"
-                           FontSize="Small"/>
-                    
+                    <!-- Make this bound to PH text in db -->
+                    <!-- bind unit to unit text in db -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Text="{Binding TextData}"
+                               HorizontalTextAlignment="End"
+                               VerticalOptions="Center"
+                               BackgroundColor="Transparent"
+                               TextColor="DarkSlateBlue"
+                               FontSize="Small"
+                               Placeholder="Eg. 82"
+                               PlaceholderColor="LightSlateGray"
+                               Grid.Column="0"/>
+                        <Label Text="UNIT"
+                               VerticalTextAlignment="Center"
+                               TextColor="Black"
+                               FontSize="Micro"
+                               Grid.Column="1"/>
+                    </Grid>
                 </Frame>
             </Grid>
         </Frame>
